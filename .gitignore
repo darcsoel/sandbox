@@ -1,2 +1,4 @@
 /venv/
 /.idea/
+/factory/__pycache__/*.pyc
+/*.pyc
