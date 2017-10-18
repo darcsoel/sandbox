@@ -6,4 +6,4 @@ for line in file.readlines():
     except Exception:
         print('error')
 
-    number = number + 1
+    number += 1

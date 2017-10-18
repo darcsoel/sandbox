@@ -1,5 +1,10 @@
 from array import array
 from factory.CarFactory import CarFactory
+import numpy as np
+
+
+# system beep, don`t work on MAC
+print("\a")
 
 # userInput = []
 # while True:
@@ -166,13 +171,13 @@ list_2 = [1, 2, 3, 4]
 list_3 = [1, 2, 3, 4]
 list_4 = [1, 2, 3, 4]
 
-for idx, item in enumerate(list_1):
+for _, item in enumerate(list_1):
     del item
 
-for idx, item in enumerate(list_2):
+for _, item in enumerate(list_2):
     list_2.remove(item)
 
-for idx, item in enumerate(list_3[:]):
+for _, item in enumerate(list_3[:]):
     list_3.remove(item)
 
 for idx, item in enumerate(list_4):
@@ -196,10 +201,15 @@ def print_hello():
     return 'hello'
 
 
-text = print_hello()
-print(text)
+# text = print_hello()
+# print(text)
 
 numberToConvert = 12
 print('Number to string -> {0}'.format(str(numberToConvert)))
 print('Octal system -> {0}'.format(oct(numberToConvert)))
 print('Hex octal system -> {0}'.format(hex(numberToConvert)))
+
+long_array = np.array(range(1, 100, 2))
+
+print(long_array)
+
