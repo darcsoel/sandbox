@@ -1,5 +1,13 @@
 import numpy as np
 
+for _ in range(1, 5):
+    print("Hello")
+
+print("\n")
+
+for index in range(1, 5):
+    print('Hello {0} : {1}'.format(index, index ** 2))
+
 userInput = []
 while True:
     var = input('Enter a word\n')
@@ -126,3 +134,12 @@ if firstStr in secondArray:
     print('Value \'{0}\' is in {1}'.format(firstStr, secondArray))
 
 print("\n")
+
+generatedArray = [x for x in range(1, 100, 3)]
+print(generatedArray)
+
+generatedArray2 = [x for x in range(1, 100, 3) if x % 4 != 0]
+print(generatedArray2)
+
+dic = {'John': 1200, 'Paul': 1000, 'Jones': 1850, 'Dorothy': 950}
+print("\n".join(["%s = %d" % (name, salary) for name, salary in dic.items()]))
