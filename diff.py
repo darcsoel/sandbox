@@ -1,5 +1,7 @@
 import random
 from factory.CarFactory import CarFactory
+from Man import Man
+from SuperMan import SuperMan
 
 a = 32
 b = 7
@@ -46,3 +48,13 @@ del someWord
 print('{0} -> {1}'.format(firstVersion, anagram))
 
 print('\n\n')
+
+man = Man('John', 'Doe')
+print(man.first_name)
+# man.first_name('Jack')
+# print(man.first_name)
+
+print('\n')
+
+man2 = SuperMan('John', 'Snow')
+print(man2.first_name)

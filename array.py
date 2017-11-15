@@ -1,4 +1,5 @@
 import numpy as np
+import pickle, shelve
 
 for _ in range(1, 5):
     print("Hello")
@@ -153,4 +154,17 @@ someFile = open('arrayReadline.txt', 'r')
 lines = someFile.readlines()
 print(lines)
 someFile.close()
-print('\n\n')
+print('\n')
+
+someDumpFile = open('dumpFile.txt', 'wb')
+pickle.dump(lines, someDumpFile)
+someDumpFile.close()
+readDumpFile = open('dumpFile.txt', 'rb')
+print('Loaded binary files\n')
+print(pickle.load(readDumpFile))
+readDumpFile.close()
+
+# someDumpFile = shelve.open('dumpFile.txt')
+# someDumpFile[] = ['dfsfdsf', 'dasdasd', 'qeqqeqqe']
+# someDumpFile.sync()
+# someDumpFile.close()
