@@ -1,4 +1,13 @@
 import numpy as np
+import pickle, shelve
+
+for _ in range(1, 5):
+    print("Hello")
+
+print("\n")
+
+for index in range(1, 5):
+    print('Hello {0} : {1}'.format(index, index ** 2))
 
 userInput = []
 while True:
@@ -126,3 +135,36 @@ if firstStr in secondArray:
     print('Value \'{0}\' is in {1}'.format(firstStr, secondArray))
 
 print("\n")
+
+generatedArray = [x for x in range(1, 100, 3)]
+print(generatedArray)
+
+generatedArray2 = [x for x in range(1, 100, 3) if x % 4 != 0]
+print(generatedArray2)
+
+dic = {'John': 1200, 'Paul': 1000, 'Jones': 1850, 'Dorothy': 950}
+print("\n".join(["%s = %d" % (name, salary) for name, salary in dic.items()]))
+
+someFile = open('arrayReadline.txt', 'r')
+# read() - read file as one line
+# readline() - read one line
+# readlines() - read all file as list of lines
+# write() - write line to file
+# writelines() - wrine list of lines to array
+lines = someFile.readlines()
+print(lines)
+someFile.close()
+print('\n')
+
+someDumpFile = open('dumpFile.txt', 'wb')
+pickle.dump(lines, someDumpFile)
+someDumpFile.close()
+readDumpFile = open('dumpFile.txt', 'rb')
+print('Loaded binary files\n')
+print(pickle.load(readDumpFile))
+readDumpFile.close()
+
+# someDumpFile = shelve.open('dumpFile.txt')
+# someDumpFile[] = ['dfsfdsf', 'dasdasd', 'qeqqeqqe']
+# someDumpFile.sync()
+# someDumpFile.close()
