@@ -38,6 +38,7 @@ thirdArray.append('dog')
 thirdArray.append('parrot')
 thirdArray.append('dog')
 thirdArray.append('dog')
+thirdArray.extend(['dog2', 'cat2', 'some3'])
 
 print(thirdArray)
 

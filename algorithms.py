@@ -13,9 +13,7 @@ def fibonacci_numbers(limit):
 
 
 fibonacciLimit = 9
-print('Fibonacci of {0} = {1}'.format(fibonacciLimit, fibonacci(fibonacciLimit)))
-print(f"Fibonacci {fibonacci(fibonacciLimit)}")
-print('Fibonacci numbers = {0}'.format(fibonacci_numbers(fibonacciLimit)))
+print('Fibonacci of {} = {}'.format(fibonacciLimit, fibonacci(fibonacciLimit)))
 
 
 def mersenne(number):
@@ -32,10 +30,10 @@ def mersenne_numbers(limit):
     return numbers
 
 
-mersenneNumber = 7
+mersenne_number = 7
 
-print('Mersenne of {0} = {1}'.format(mersenneNumber, mersenne(mersenneNumber)))
-print('Mersenne numbers = {0}'.format(mersenne_numbers(mersenneNumber)))
+print('Mersenne of {0} = {1}'.format(mersenne_number, mersenne(mersenne_number)))
+print('Mersenne numbers = {0}'.format(mersenne_numbers(mersenne_number)))
 
 
 def greatest_common_divisor(first, second):
@@ -57,21 +55,25 @@ print(least_common_multiple(840, 396))
 
 
 def selection_sort(alist):
-    for fillslot in range(len(alist) - 1, 0, -1):
+    for slot in range(len(alist) - 1, 0, -1):
         position_of_max = 0
-        for location in range(1, fillslot + 1):
+        for location in range(1, slot + 1):
             if alist[location] > alist[position_of_max]:
                 position_of_max = location
 
-        temp = alist[fillslot]
-        alist[fillslot] = alist[position_of_max]
+        temp = alist[slot]
+        alist[slot] = alist[position_of_max]
         alist[position_of_max] = temp
 
 
+print('\n\n')
+
 alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 list_for_merge_sort = alist[:]
+print(list_for_merge_sort)
 selection_sort(alist)
 print(alist)
+
 
 
 def merge(a, b):
@@ -102,9 +104,7 @@ def merge_sort(x):
         return merge(a, b)
 
 
+print('\n\n')
+
 print(list_for_merge_sort)
 print(merge_sort(list_for_merge_sort))
-
-
-def huffman(text):
-    pass
