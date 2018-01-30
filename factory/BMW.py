@@ -4,6 +4,6 @@ class BMW(object):
         self.model = model
         self.name = 'BMW'
 
-    def to_string(self):
+    def __str__(self):
         return '{0} {1} ({2})'.format(self.name, self.model, self.price)
 
