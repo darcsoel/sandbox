@@ -75,7 +75,6 @@ selection_sort(alist)
 print(alist)
 
 
-
 def merge(a, b):
     """ Function to merge two arrays """
     c = []
