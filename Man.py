@@ -14,6 +14,12 @@ class Man(Alive):
         self.__first_name = first_name
         self.__last_name = last_name
 
+    def __eq__(self, other):
+        if not isinstance(other, Man):
+            return False
+
+        return self.first_name == other.first_name and self.first_name == other.first_name
+
     @property
     def first_name(self):
         return self.__first_name
@@ -24,3 +30,10 @@ class Man(Alive):
 
     def backbone(self):
         print('I have backbone')
+
+
+if __name__ == '__main__':
+    first = Man('john', 'doe')
+    second = Man('john', 'doe')
+
+    print(first == second)
