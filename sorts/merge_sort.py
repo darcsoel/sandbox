@@ -26,8 +26,9 @@ def merge_sort(array):
     return result
 
 
-m_array = [1, 4, 82, 41, 32, 45, 2, 54, 12, 5, 34, 21, 78, 451, 65]
+if __name__ == '__main__':
+    m_array = [1, 4, 82, 41, 32, 45, 2, 54, 12, 5, 34, 21, 78, 451, 65]
 
-print('Count of elements = \t{0}'.format(len(m_array)))
-print('Unsorted array - \t\t{0}'.format(m_array))
-print('Sorted array - \t\t\t{0}'.format((merge_sort(m_array))))
+    print('Count of elements = \t{0}'.format(len(m_array)))
+    print('Unsorted array - \t\t{0}'.format(m_array))
+    print('Sorted array - \t\t\t{0}'.format((merge_sort(m_array))))

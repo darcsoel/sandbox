@@ -11,8 +11,9 @@ def quick_sort(array):
     return quick_sort(less) + [pivot] + quick_sort(more)
 
 
-q_array = [0, 5, 5, 35, 2, 65, 32, 4, 3, 23, 95, 50, 1, 45, 6]
+if __name__ == '__main__':
+    q_array = [0, 5, 5, 35, 2, 65, 32, 4, 3, 23, 95, 50, 1, 45, 6]
 
-print('Number of elements - \t{0}'.format(len(q_array)))
-print('Non-sorted array - \t\t{0}'.format(q_array))
-print('Sorted array - \t\t\t{0}'.format(quick_sort(q_array)))
+    print('Number of elements - \t{0}'.format(len(q_array)))
+    print('Non-sorted array - \t\t{0}'.format(q_array))
+    print('Sorted array - \t\t\t{0}'.format(quick_sort(q_array)))
