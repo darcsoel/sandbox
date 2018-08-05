@@ -4,6 +4,16 @@ class Node:
         self.left_child = None
         self.right_child = None
 
+    def __str__(self):
+        left, right = None, None
+
+        if self.left_child is not None:
+            left = self.left_child.value
+        if self.right_child is not None:
+            right = self.right_child.value
+
+        return '(< {0} - {1} - {2} >)'.format(left, self.value, right)
+
     def insert(self, value):
         if self.value is None:
             self.value = value
@@ -19,7 +29,7 @@ class Node:
                 else:
                     self.left_child.insert(value)
 
-    # todo complete this 
+    # todo complete this
     def delete(self, value):
         pass
 
@@ -30,7 +40,7 @@ class Node:
             return self.left_child.find(value)
 
         if self.value == value:
-            return value
+            return self
         else:
             raise KeyError('Value {0} not found'.format(value))
 
@@ -56,7 +66,7 @@ if __name__ == '__main__':
 
     print(node.print_tree(node))
 
-    for element in [4, 5, 9]:
+    for element in [16, 34, 5, 9]:
         try:
             searched = node.find(element)
         except KeyError as err:
