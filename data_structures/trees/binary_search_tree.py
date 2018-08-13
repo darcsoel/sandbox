@@ -5,12 +5,8 @@ class Node:
         self.right_child = None
 
     def __str__(self):
-        left, right = None, None
-
-        if self.left_child is not None:
-            left = self.left_child.value
-        if self.right_child is not None:
-            right = self.right_child.value
+        left = self.left_child.value if self.left_child else None
+        right = self.right_child.value if self.right_child else None
 
         return '(< {0} - {1} - {2} >)'.format(left, self.value, right)
 
@@ -29,11 +25,27 @@ class Node:
                 else:
                     self.left_child.insert(value)
 
-    # todo complete this
     def delete(self, value):
-        pass
+        try:
+            finded = self.find(value)
+        except KeyError as err:
+            return err.args[0]
+
+        if finded.left_child is None and finded.right_child is None:
+            finded.value = None
+        elif finded.left_child is None:
+            pass
+        elif finded.right_child is None:
+            pass
+        else:
+            pass
+
+        return True
 
     def find(self, value):
+        if self.value is None:
+            raise KeyError('Value {0} not found11'.format(value))
+
         if value > self.value and self.right_child:
             return self.right_child.find(value)
         elif value < self.value and self.left_child:
@@ -73,3 +85,11 @@ if __name__ == '__main__':
             searched = err.args[0]
 
         print("Find element '{0}' - {1}".format(element, searched))
+
+    print(node.delete(3))
+    print(node.delete(9))
+
+    try:
+        print(node.find(9))
+    except KeyError as err:
+        print(err.args[0])
