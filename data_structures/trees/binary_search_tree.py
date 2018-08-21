@@ -38,11 +38,23 @@ class Node:
                 parent.left_child = finded.right_child
             else:
                 parent.right_child = finded.right_child
-        else:
+        elif finded.right_child is None:
             if parent.left_child.value == value:
                 parent.left_child = finded.left_child
             else:
                 parent.right_child = finded.left_child
+        else:
+            parent = finded
+            successor = finded.right_child
+            while successor.left_child:
+                parent = successor
+                successor = successor.left_child
+            finded.value = successor.value
+
+            if parent.left_child == successor:
+                parent.left_child = successor.right_child
+            else:
+                parent.right_child = successor.right_child
 
         return True
 
@@ -104,4 +116,4 @@ if __name__ == '__main__':
     except KeyError as err:
         print(err.args[0])
 
-    print_searched_values(node, [16, 25, 22, 5, 9])
+    print_searched_values(node, [16, 25, 22, 34, 54, 9])
