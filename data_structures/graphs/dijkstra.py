@@ -13,13 +13,14 @@ class Graph:
         vehicles = {i: True for i in range(len(self.matrix))}
         self.visited[self.start_from] = True
         self.way.insert(0, self.start_from)
+        del vehicles[self.start_from]
 
         while len(vehicles) > 0:
             connections = self.matrix[self.start_from]
 
             if all(connection == 0 for connection in connections) and len(self.way) > 0:
+                self.visited[self.start_from] = True
                 self.wrong_vehicle = self.start_from
-                vehicles[self.start_from] = True
                 self.start_from = self.way.pop()
                 continue
 
@@ -28,24 +29,22 @@ class Graph:
                               if closest != self.start_from and not self.visited[closest]
                               and closest != self.wrong_vehicle]
 
-            if not neighbourhoods:
-                break
-
-            closest = False
+            closest = None
 
             for closest_vehicle, weight in neighbourhoods:
                 if 0 < weight < min_weight:
                     min_weight = weight
                     closest = closest_vehicle
 
+            if not closest:
+                continue
+
             if min_weight != sys.maxsize and closest:
                 self.visited[self.start_from] = True
                 self.way.insert(0, closest)
                 self.start_from = closest
-                if self.wrong_vehicle is None:
-                    del vehicles[self.start_from]
-                else:
-                    self.wrong_vehicle = None
+                self.wrong_vehicle = None
+                del vehicles[self.start_from]
 
     def print_way(self):
         return self.way
@@ -54,7 +53,7 @@ class Graph:
 graph_matrix = [
     [0, 10, 30, 50, 10],
     [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 10],
+    [0, 0, 0, 10, 10],
     [0, 40, 20, 0, 0],
     [10, 0, 10, 30, 0],
 ]
