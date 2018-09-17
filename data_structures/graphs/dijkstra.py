@@ -6,13 +6,14 @@ class Graph:
         self.matrix = matrix
         self.start_from = start_from
         self.visited = [False] * len(self.matrix)
-        self.way = list()
+        self.way, self.backup_way = list(), list()
         self.wrong_vehicle = None
 
     def calculate(self):
         vehicles = {i: True for i in range(len(self.matrix))}
         self.visited[self.start_from] = True
         self.way.insert(0, self.start_from)
+        self.backup_way.insert(0, self.start_from)
         del vehicles[self.start_from]
 
         while len(vehicles) > 0:
@@ -37,11 +38,13 @@ class Graph:
                     closest = closest_vehicle
 
             if not closest:
-                continue
+                self.wrong_vehicle = self.start_from
+                self.start_from = self.backup_way.pop()
 
             if min_weight != sys.maxsize and closest:
                 self.visited[self.start_from] = True
                 self.way.insert(0, closest)
+                self.backup_way.insert(0, closest)
                 self.start_from = closest
                 self.wrong_vehicle = None
                 del vehicles[self.start_from]
@@ -53,7 +56,7 @@ class Graph:
 graph_matrix = [
     [0, 10, 30, 50, 10],
     [0, 0, 0, 0, 0],
-    [0, 0, 0, 10, 10],
+    [0, 0, 0, 0, 10],
     [0, 40, 20, 0, 0],
     [10, 0, 10, 30, 0],
 ]
