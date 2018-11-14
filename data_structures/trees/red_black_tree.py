@@ -54,3 +54,6 @@ class RedBlackTree:
                 parent_node.left_child = Node(value=value)
 
         return True
+
+    def _case3(self, value, parent_node):
+        pass
