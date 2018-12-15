@@ -1,3 +1,5 @@
+from random import sample
+
 BLACK = 'BLACK'
 RED = 'RED'
 NIL = 'NIL'
@@ -10,9 +12,10 @@ class Nil:
 
 
 class Node:
-    def __init__(self, color=RED, value=None, left_child=None, right_child=None):
+    def __init__(self, color=RED, value=None, left_child=None, right_child=None, parent=None):
         self.color = color
         self.value = value
+        self.parent = parent
         self.left_child = left_child if left_child else Nil()
         self.right_child = right_child if right_child else Nil()
 
@@ -46,14 +49,26 @@ class RedBlackTree:
             if parent_node.right_child is not Nil:
                 self._case2(value, parent_node.right_child)
             else:
-                parent_node.right_child = Node(value=value)
+                parent_node.right_child = Node(value=value, parent=parent_node)
         else:
             if parent_node.left_child is not Nil:
                 self._case2(value, parent_node.left_child)
             else:
-                parent_node.left_child = Node(value=value)
+                parent_node.left_child = Node(value=value, parent=parent_node)
 
         return True
 
     def _case3(self, value, parent_node):
         pass
+
+    def _case4(self, value, parent_node):
+        pass
+
+    def _case5(self, value, parent_node):
+        pass
+
+
+if __name__ == '__main__':
+    rb_tree = RedBlackTree()
+    values = sample(range(1, 50), 20)
+    rb_tree.insert(value=1)
