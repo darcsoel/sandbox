@@ -24,26 +24,41 @@ class RedBlackTree:
     def __init__(self):
         self.root = None
 
-    def insert(self, value=int, node=None):
-        if node is None:
-            node = self.root
+    def insert(self, value: int) -> None:
+        """
+        Insert value to tree
 
-        if self._case1(value):
-            return
+        :param value:
+        :return:
+        """
 
-        if self._case2(value, node):
-            return
+        self._case1(value)
 
-    def _case1(self, value):
+    def _case1(self, value) -> bool:
+        """
+        Case if node is root
+
+        :param value: int
+        :return: None
+        """
         if self.root is None:
             self.root = Node(value=value, color=BLACK)
             return True
 
         return False
 
-    def _case2(self, value, parent_node):
-        if parent_node.color is RED:
-            return False
+    def _case2(self, value, parent_node=None):
+        """
+        Case if father is black
+
+        :param value: int
+        :param parent_node: Node | None
+        :return: bool
+        """
+        if self.root is None:
+            raise ValueError('root element is not defined')
+
+        parent_node = self.root
 
         if value > parent_node.value:
             if parent_node.right_child is not Nil:
@@ -58,13 +73,50 @@ class RedBlackTree:
 
         return True
 
-    def _case3(self, value, parent_node):
+    def _case3(self, value, parent_node=None):
+        """
+        Case if father and uncle are red
+        Recolor both to black and recolor grandfather
+
+        :param value: int
+        :param parent_node: Node | None
+        :return: bool
+        """
         pass
 
     def _case4(self, value, parent_node):
+        """
+        Father if red, uncle is black
+        New node is right child, parent is left child
+        Make left rotate
+
+        :param value: int
+        :param parent_node: Node
+        :return: None
+        """
         pass
 
     def _case5(self, value, parent_node):
+        """
+        Father if red, uncle is black
+        New node is left child, parent is left child
+        Make right rotate
+
+        :param value: int
+        :param parent_node: Node
+        :return: None
+        """
+        pass
+
+    def _rotate(self, node: Node, direction=-1):
+        """
+        Rotate peace of tree
+        Child and direction is linked, depends on direction
+
+        :param node: center node to rotate, parent-node-child
+        :param direction: -1 - left, 1 - right
+        :return: bool
+        """
         pass
 
 
