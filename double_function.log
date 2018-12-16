@@ -1,0 +1,8 @@
+2018-06-23 12:07:05,021 - double_function - INFO - Call function: double_function
+2018-06-23 12:07:05,022 - double_function - INFO - Result: 4
+2018-06-23 12:08:28,328 - double_function - INFO - Call function: double_function
+2018-06-23 12:08:28,331 - double_function - INFO - Result: 4
+2018-06-24 00:31:07,172 - double_function - INFO - Call function: double_function
+2018-06-24 00:31:07,182 - double_function - INFO - Result: 4
+2018-06-24 19:07:29,201 - double_function - INFO - Call function: double_function
+2018-06-24 19:07:29,202 - double_function - INFO - Result: 4

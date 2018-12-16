@@ -10,12 +10,12 @@ for index in range(1, 5):
     print('Hello {0} : {1}'.format(index, index ** 2))
 
 userInput = []
-while True:
-    var = input('Enter a word\n')
-    if len(var) == 0:
-        break
-    else:
-        userInput.append(var)
+# while True:
+    # var = input('Enter a word\n')
+    # if len(var) == 0:
+    #     break
+    # else:
+    #     userInput.append(var)
 
 print('Yoy entered - {0}'.format(userInput))
 
@@ -27,43 +27,50 @@ print(long_array)
 
 print('\n')
 
-thirdArray = []
-if thirdArray:
+third_array = []
+if third_array:
     print('Not empty array')
 else:
     print('Empty array')
 
-thirdArray.append('cat')
-thirdArray.append('dog')
-thirdArray.append('parrot')
-thirdArray.append('dog')
-thirdArray.append('dog')
+third_array.append('cat')
+third_array.append('dog')
+third_array.append('parrot')
+third_array.append('dog')
+third_array.append('dog')
+third_array.extend(['dog2', 'cat2', 'some3'])
 
-print(thirdArray)
+print(third_array)
 
-while 'dog' in thirdArray:
-    thirdArray.remove('dog')
+while 'dog' in third_array:
+    third_array.remove('dog')
 
-print(thirdArray)
+print(third_array)
 print('\n\n')
 
-firstArrayForMerge = ['some', 'val']
-secondArrayForMerge = ['to', 'merge']
+first_array_for_merge = ['some', 'val']
+second_array_for_merge = ['to', 'merge']
 
-print(firstArrayForMerge + secondArrayForMerge)
+print(first_array_for_merge + second_array_for_merge)
 
 print("\n\n")
 
-firstDictionary = {}
-print(firstDictionary)
-firstDictionary['key1'] = 'val1'
-firstDictionary['key2'] = 'val2'
-firstDictionary['key3'] = 'val3'
-print(firstDictionary)
+first_dictionary = {}
+print(first_dictionary)
+first_dictionary['key1'] = 'val1'
+first_dictionary['key2'] = 'val2'
+first_dictionary['key3'] = 'val3'
+print(first_dictionary)
 
 # .items() .values() .keys() methods
-for key, value in firstDictionary.items():
+for key, value in first_dictionary.items():
     print('Key - {0} : Value - {1}'.format(key, value))
+
+flip_revert_dictionary = {value: key for key, value in first_dictionary.items()}
+
+for key, value in flip_revert_dictionary.items():
+    print('Key - {0} : Value - {1}'.format(key, value))
+
 
 list_1 = [1, 2, 3, 4]
 list_2 = [1, 2, 3, 4]
