@@ -123,7 +123,7 @@ class RedBlackTree:
         """
         Father if red, uncle is black
         New node is left child, parent is left child
-        Make right rotate
+        Make right rotate with grandfather
 
         :param value: int
         :param parent_node: Node
@@ -149,10 +149,20 @@ class RedBlackTree:
             parent.left_child = child
             child.left_child = rotator
         else:
-            pass
+            parent = node.parent
+            rotator = node
+            child = node.left_child
+
+            parent.left_child = child
+            child.left_child = rotator
 
 
 if __name__ == '__main__':
     rb_tree = RedBlackTree()
     values = sample(range(1, 50), 20)
-    rb_tree.insert(value=1)
+    rb_tree.insert(1)
+    rb_tree.insert(14)
+    rb_tree.insert(7)
+    rb_tree.insert(8)
+    rb_tree.insert(12)
+    rb_tree.insert(3)
