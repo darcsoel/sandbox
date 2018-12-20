@@ -32,7 +32,29 @@ class RedBlackTree:
         :return:
         """
 
-        self._case1(value)
+        if self._case1(value):
+            pass
+
+    def find(self, value, parent_node: Node = None) -> Node:
+        """
+        Find node with needed value
+
+        :param value: search value
+        :param parent_node: parent node, root default
+        :return: Node
+        """
+        if parent_node is None:
+            parent_node = self.root
+
+        if value < parent_node:
+            return self.find(value, parent_node.left_child)
+        elif value > parent_node:
+            return self.find(value, parent_node.right_child)
+
+        if value == parent_node.value:
+            return parent_node
+        else:
+            raise KeyError('Value not exist')
 
     def _case1(self, value) -> bool:
         """
@@ -47,7 +69,7 @@ class RedBlackTree:
 
         return False
 
-    def _case2(self, value, parent_node=None):
+    def _case2(self, value, parent_node: Node = None) -> bool:
         """
         Case if father is black
 
@@ -58,7 +80,8 @@ class RedBlackTree:
         if self.root is None:
             raise ValueError('root element is not defined')
 
-        parent_node = self.root
+        if parent_node is None:
+            parent_node = self.root
 
         if value > parent_node.value:
             if parent_node.right_child is not Nil:
@@ -108,16 +131,25 @@ class RedBlackTree:
         """
         pass
 
-    def _rotate(self, node: Node, direction=-1):
+    @staticmethod
+    def _rotate(node: Node, direction: int = -1) -> None:
         """
         Rotate peace of tree
         Child and direction is linked, depends on direction
 
-        :param node: center node to rotate, parent-node-child
+        :param node: center node to rotate, parent-(node)-child
         :param direction: -1 - left, 1 - right
-        :return: bool
+        :return: None
         """
-        pass
+        if direction < 0:
+            parent = node.parent
+            rotator = node
+            child = node.right_child
+
+            parent.left_child = child
+            child.left_child = rotator
+        else:
+            pass
 
 
 if __name__ == '__main__':
