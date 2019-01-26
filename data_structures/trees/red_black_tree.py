@@ -160,9 +160,6 @@ class RedBlackTree:
 if __name__ == '__main__':
     rb_tree = RedBlackTree()
     values = sample(range(1, 50), 20)
-    rb_tree.insert(1)
-    rb_tree.insert(14)
-    rb_tree.insert(7)
-    rb_tree.insert(8)
-    rb_tree.insert(12)
-    rb_tree.insert(3)
+
+    for numb in values:
+        rb_tree.insert(numb)
