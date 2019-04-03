@@ -14,3 +14,5 @@ zero_array = np.zeros(10, dtype='int16')  # default - float
 
 print("\nZero`s array")
 print(zero_array)
+
+np.ndarray([])
