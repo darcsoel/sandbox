@@ -53,15 +53,16 @@ class Graph:
         return self.way
 
 
-graph_matrix = [
-    [0, 10, 30, 50, 10],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 10],
-    [0, 40, 20, 0, 0],
-    [10, 0, 10, 30, 0],
-]
+if __name__ == '__main__':
+    graph_matrix = [
+        [0, 10, 30, 50, 10],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 10],
+        [0, 40, 20, 0, 0],
+        [10, 0, 10, 30, 0],
+    ]
 
-dijkstra = Graph(graph_matrix)
-dijkstra.calculate()
+    dijkstra = Graph(graph_matrix)
+    dijkstra.calculate()
 
-print(dijkstra.print_way())
+    print(dijkstra.print_way())
