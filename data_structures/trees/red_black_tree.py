@@ -5,19 +5,28 @@ RED = 'RED'
 NIL = 'NIL'
 
 
-class Nil:
-    def __init__(self):
-        self.color = BLACK
-        self.value, self.left_child, self.right_child = None, None, None
-
-
 class Node:
+    """
+    Node instance, red or black
+    Must contain children and parent
+
+    """
+
     def __init__(self, color=RED, value=None, left_child=None, right_child=None, parent=None):
         self.color = color
         self.value = value
         self.parent = parent
-        self.left_child = left_child if left_child else Nil()
-        self.right_child = right_child if right_child else Nil()
+        self.left_child = left_child if left_child else Node(color=BLACK, parent=value)
+        self.right_child = right_child if right_child else Node(color=BLACK, parent=value)
+
+    def __lt__(self, other):
+        return self.value < other.value
+
+    def __gt__(self, other):
+        return self.value > other.value
+
+    def __eq__(self, other):
+        return self.value == other.value
 
 
 class RedBlackTree:
@@ -32,48 +41,50 @@ class RedBlackTree:
         :return:
         """
 
-        if self._case1(value):
+        node = Node(value=value, color=BLACK)
+
+        if self._case1(node):
             pass
 
-    def find(self, value, parent_node: Node = None) -> Node:
+    def find(self, node, parent_node: Node = None) -> Node:
         """
         Find node with needed value
 
-        :param value: search value
+        :param node: search value
         :param parent_node: parent node, root default
         :return: Node
         """
         if parent_node is None:
             parent_node = self.root
 
-        if value < parent_node:
-            return self.find(value, parent_node.left_child)
-        elif value > parent_node:
-            return self.find(value, parent_node.right_child)
+        if node < parent_node:
+            return self.find(node, parent_node.left_child)
+        elif node > parent_node:
+            return self.find(node, parent_node.right_child)
 
-        if value == parent_node.value:
+        if node == parent_node:
             return parent_node
         else:
             raise KeyError('Value not exist')
 
-    def _case1(self, value) -> bool:
+    def _case1(self, node: Node) -> bool:
         """
         Case if node is root
 
-        :param value: int
+        :param node: int
         :return: None
         """
         if self.root is None:
-            self.root = Node(value=value, color=BLACK)
+            self.root = node
             return True
 
         return False
 
-    def _case2(self, value, parent_node: Node = None) -> bool:
+    def _case2(self, node: Node, parent_node: Node = None) -> bool:
         """
         Case if father is black
 
-        :param value: int
+        :param node: int
         :param parent_node: Node | None
         :return: bool
         """
@@ -83,16 +94,16 @@ class RedBlackTree:
         if parent_node is None:
             parent_node = self.root
 
-        if value > parent_node.value:
-            if parent_node.right_child is not Nil:
-                self._case2(value, parent_node.right_child)
+        if node > parent_node.value:
+            if parent_node.right_child.value is not None:
+                self._case2(node, parent_node.right_child)
             else:
-                parent_node.right_child = Node(value=value, parent=parent_node)
+                parent_node.right_child = Node(value=node, parent=parent_node)
         else:
-            if parent_node.left_child is not Nil:
-                self._case2(value, parent_node.left_child)
+            if parent_node.left_child.value is not None:
+                self._case2(node, parent_node.left_child)
             else:
-                parent_node.left_child = Node(value=value, parent=parent_node)
+                parent_node.left_child = Node(value=node, parent=parent_node)
 
         return True
 
