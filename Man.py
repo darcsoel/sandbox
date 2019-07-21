@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 
-class Alive():
+class Alive:
     __metaclass__ = ABCMeta
 
     @abstractmethod
