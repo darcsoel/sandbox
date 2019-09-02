@@ -12,8 +12,20 @@ def fibonacci_numbers(limit):
     return numbers
 
 
-fibonacciLimit = 9
-print('Fibonacci of {} = {}'.format(fibonacciLimit, fibonacci(fibonacciLimit)))
+fibonacci_limit = 9
+print('Fibonacci of {} = {}'.format(fibonacci_limit, fibonacci(fibonacci_limit)))
+
+
+def fibonacci_simple(num: int) -> int:
+    a, b = 0, 1
+    for i in range(num):
+        a, b = b, a + b
+
+    return a
+
+
+fib_sim = fibonacci_simple(fibonacci_limit)
+print(f'Fibonacci of {fibonacci_limit} = {fib_sim}')
 
 
 def mersenne(number):
