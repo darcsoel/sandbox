@@ -19,8 +19,11 @@ class C(A):
         super().__init__()
         self.message = 'third'
 
+    def check(self):
+        super().check() + print(self.message)
 
-class Main(A, B):
+
+class Main(C, B):
     def run(self):
         self.check()
 
