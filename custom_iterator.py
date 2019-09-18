@@ -20,4 +20,8 @@ values = [1, 2, 3, 4, 5, 6, 7]
 iterator = CustomIterator(values)
 
 print(iterator)
-print(list(iterator))
+for i in iterator:
+    print(i)
+print(iterator)
+for i in iterator:
+    print(i)
