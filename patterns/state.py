@@ -6,6 +6,10 @@ class AbstractState(metaclass=abc.ABCMeta):
     def run(self):
         pass
 
+    @abc.abstractmethod
+    def stop(self):
+        pass
+
 
 class StateFirst(AbstractState):
     def run(self):
