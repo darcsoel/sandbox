@@ -1,9 +1,13 @@
 class Item:
     def __init__(self):
-        self.x = 1
+        self._x = 1
 
     def run(self):
-        self.x = 2
+        self._x = 2
+
+    @property
+    def x(self):
+        return self._x
 
 
 class CustomItem(Item):
@@ -12,7 +16,7 @@ class CustomItem(Item):
 
 class MockItem(Item):
     def run(self):
-        self.x = 3
+        self._x = 3
 
 
 class Context(CustomItem, MockItem):
