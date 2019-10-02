@@ -4,16 +4,11 @@ HOST = '127.0.0.1'
 PORT = 25025
 
 if __name__ == '__main__':
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
-        s.listen()
+    import socket
 
-        conn, addr = s.accept()
-
-        with conn:
-            while True:
-                data = conn.recv(1024)
-                if not data:
-                    break
-
-                conn.sendall(data)
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((HOST, PORT))
+    client.send(b"I am CLIENT\n")
+    from_server = client.recv(4096)
+    client.close()
+    print(from_server)
