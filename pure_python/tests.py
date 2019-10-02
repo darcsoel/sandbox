@@ -1,5 +1,5 @@
 import unittest
-from Man import Man
+from .Man import Man
 
 
 class TestManSurvey(unittest.TestCase):
