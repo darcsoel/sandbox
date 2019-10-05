@@ -4,8 +4,6 @@ HOST = '127.0.0.1'
 PORT = 25025
 
 if __name__ == '__main__':
-    import socket
-
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((HOST, PORT))
     client.send(b"I am CLIENT\n")
