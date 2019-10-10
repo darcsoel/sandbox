@@ -1,14 +1,13 @@
 class Foo:
+    y = 1
+
     def __init__(self):
         self.x = 1
-
-    @staticmethod
-    def static_foo(x):
-        print(x)
 
     @classmethod
     def class_foo(cls, x):
         cls.x = x
+        cls.y = x
 
 
 Foo.class_foo(4)
@@ -23,3 +22,7 @@ test2 = Foo()
 print(Foo.x)
 print(test.x)
 print(test2.x)
+
+print(Foo.y)
+print(test.y)
+print(test2.y)
