@@ -1,3 +1,11 @@
+import contextlib
+
+
+@contextlib.contextmanager
+def func_context_manager():
+    pass
+
+
 class Context:
     def __init__(self):
         self.__x = 0
