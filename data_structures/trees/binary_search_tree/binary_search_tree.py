@@ -27,29 +27,29 @@ class Node:
 
     def delete(self, value):
         try:
-            finded, parent = self.find(value)
-        except KeyError as err:
-            return err.args[0]
+            founded, parent = self.find(value)
+        except KeyError as e:
+            return e.args[0]
 
-        if finded.left_child is None and finded.right_child is None:
-            finded.value = None
-        elif finded.left_child is None:
+        if founded.left_child is None and founded.right_child is None:
+            founded.value = None
+        elif founded.left_child is None:
             if parent.left_child.value == value:
-                parent.left_child = finded.right_child
+                parent.left_child = founded.right_child
             else:
-                parent.right_child = finded.right_child
-        elif finded.right_child is None:
+                parent.right_child = founded.right_child
+        elif founded.right_child is None:
             if parent.left_child.value == value:
-                parent.left_child = finded.left_child
+                parent.left_child = founded.left_child
             else:
-                parent.right_child = finded.left_child
+                parent.right_child = founded.left_child
         else:
-            parent = finded
-            successor = finded.right_child
+            parent = founded
+            successor = founded.right_child
             while successor.left_child:
                 parent = successor
                 successor = successor.left_child
-            finded.value = successor.value
+            founded.value = successor.value
 
             if parent.left_child == successor:
                 parent.left_child = successor.right_child
@@ -89,31 +89,8 @@ def print_searched_values(node, elements):
     for element in elements:
         try:
             searched, _ = node.find(element)
-        except KeyError as err:
-            searched = err.args[0]
+        except KeyError as e:
+            searched = e.args[0]
 
         print("Find element '{0}' - {1}".format(element, searched))
 
-
-if __name__ == '__main__':
-    values_for_input = [16, 6, 25, 2, 34, 54, 22, 4, 12, 15, 9]
-    node = Node()
-
-    for number in values_for_input:
-        node.insert(number)
-
-    print(node.print_tree(node))
-
-    print_searched_values(node, [16, 25, 22, 34, 5, 9])
-
-    print(node.delete(3))
-    print(node.delete(9))
-    print(node.delete(25))
-
-    try:
-        print(node.find(9))
-        print(node.find(16))
-    except KeyError as err:
-        print(err.args[0])
-
-    print_searched_values(node, [16, 25, 22, 34, 54, 9])

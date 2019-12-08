@@ -1,7 +1,6 @@
 import unittest
 
-from data_structures.linked_list.list_item import ListItem
-from data_structures.linked_list.singly_linked_list import LinkedList
+from data_structures.linked_list.singly_linked_list import LinkedList, ListItem
 
 
 class LinkedListTest(unittest.TestCase):
