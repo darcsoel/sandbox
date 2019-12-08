@@ -1,3 +1,9 @@
+"""
+Linked list realization
+All methods covered by pytest (data_structures/linked_list/tests.py)
+
+"""
+
 from data_structures.linked_list.list_item import ListItem
 
 
@@ -80,27 +86,4 @@ class LinkedList:
 
         del to_delete
 
-
-if __name__ == '__main__':
-    first_node = ListItem('test1')
-    second_node = ListItem('test2')
-    third_node = ListItem('test3')
-    forth_node = ListItem('test4')
-    fifth_node = ListItem('test5')
-
-    linked_list = LinkedList()
-    linked_list.push(first_node)
-    linked_list.push(second_node)
-    linked_list.push(third_node)
-    linked_list.push(forth_node)
-    linked_list.push(fifth_node)
-
-    linked_list.print()
-
-    linked_list.pop()
-    linked_list.print()
-
-    linked_list.delete(second_node)
-    linked_list.delete(forth_node)
-    linked_list.print()
 
