@@ -3,20 +3,20 @@ import math
 
 class Legacy:
     def __init__(self):
-        self.__x = 1
-        self.__y = 2
+        self._x = 1
+        self._y = 2
 
     def calculate_hypotenuse(self):
-        return math.sqrt(self.__x ** 2 + self.__y ** 2)
+        return math.sqrt(self._x ** 2 + self._y ** 2)
 
     def double_x(self):
-        self.__x = self.__x ** 2
+        self._x **= 2
 
     def double_y(self):
-        self.__y = self.__y ** 2
+        self._y **= 2
 
     def calculate_hypotenuse_simple(self):
-        return math.sqrt(self.__x + self.__y)
+        return math.sqrt(self._x + self._y)
 
 
 class CustomAdapter:

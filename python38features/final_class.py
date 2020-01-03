@@ -6,7 +6,6 @@ class Bar:
     def __init__(self, val):
         self._val = val
 
-    @final
     def prettify(self):
         return f'Value {self._val}'
 
