@@ -1,19 +1,19 @@
-def fibonacci(number):
+def _fibonacci(number):
     if number == 0 or number == 1:
         return number
     else:
-        return fibonacci(number - 1) + fibonacci(number - 2)
+        return _fibonacci(number - 1) + _fibonacci(number - 2)
 
 
-def fibonacci_numbers(limit):
+def fibonacci(limit):
     numbers = []
     for i in range(0, limit + 1):
-        numbers.append(fibonacci(i))
+        numbers.append(_fibonacci(i))
     return numbers
 
 
 fibonacci_limit = 9
-print('Fibonacci of {} = {}'.format(fibonacci_limit, fibonacci(fibonacci_limit)))
+print('Fibonacci of {} = {}'.format(fibonacci_limit, _fibonacci(fibonacci_limit)))
 
 
 def fibonacci_simple(num: int) -> int:
@@ -28,24 +28,24 @@ fib_sim = fibonacci_simple(fibonacci_limit)
 print(f'Fibonacci of {fibonacci_limit} = {fib_sim}')
 
 
-def mersenne(number):
+def _mersenne(number):
     if number == 0 or number == 1:
         return number
     else:
         return 2 ** number - 1
 
 
-def mersenne_numbers(limit):
+def mersenne(limit):
     numbers = []
     for i in range(0, limit + 1):
-        numbers.append(mersenne(i))
+        numbers.append(_mersenne(i))
     return numbers
 
 
 mersenne_number = 7
 
-print('Mersenne of {0} = {1}'.format(mersenne_number, mersenne(mersenne_number)))
-print('Mersenne numbers = {0}'.format(mersenne_numbers(mersenne_number)))
+print('Mersenne of {0} = {1}'.format(mersenne_number, _mersenne(mersenne_number)))
+print('Mersenne numbers = {0}'.format(mersenne(mersenne_number)))
 
 
 def greatest_common_divisor(first, second):

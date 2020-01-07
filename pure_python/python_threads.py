@@ -10,8 +10,8 @@ def thread_function(name):
 
 
 if __name__ == "__main__":
-    format = "%(asctime)s: %(message)s"
-    logging.basicConfig(format=format, level=logging.INFO,
+    format_ = "%(asctime)s: %(message)s"
+    logging.basicConfig(format=format_, level=logging.INFO,
                         datefmt="%H:%M:%S")
 
     threads = list()

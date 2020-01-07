@@ -19,6 +19,18 @@ class Realization(AbcTest):
         return 'hello'
 
 
+class AbcMetaTest(abc.ABCMeta):
+    @abc.abstractmethod
+    def abstract(self):
+        pass
+
+
+@AbcMetaTest.register
+class RegisterParent:
+    def abstract(self):
+        return 'hello'
+
+
 if __name__ == '__main__':
     # can not initialize, raise TypeError
     # x = AbcTest()
@@ -28,3 +40,6 @@ if __name__ == '__main__':
     y = Realization()
     print(y.abstract())
     print(y.x)
+
+    z = RegisterParent()
+    print(z.abstract())
