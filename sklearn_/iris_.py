@@ -20,15 +20,15 @@ svc_y_model = svc_model.predict(x_test)
 svc_accuracy = metrics.accuracy_score(y_test, svc_y_model)
 print(f'SVC model accuracy = {svc_accuracy}')
 
-decomposition_model = decomposition.PCA(n_components=2)
-decomposition_model.fit(x_train)
-x2d = decomposition_model.transform(x_train)
-
-print(f'Decomposition to 2d array - {reprlib.repr(x2d)}')
-
 gmm_model = mixture.GaussianMixture(n_components=3)
 gmm_model.fit(x_train, y_train)
 gmm_y_model = gmm_model.predict(x_test)
 
 gmm_accuracy = metrics.accuracy_score(y_test, gmm_y_model)
 print(f'GMM model accuracy = {gmm_accuracy}')
+
+decomposition_model = decomposition.PCA(n_components=2)
+decomposition_model.fit(x_train)
+x2d = decomposition_model.transform(x_train)
+
+print(f'Decomposition to 2d array - {reprlib.repr(x2d)}')
