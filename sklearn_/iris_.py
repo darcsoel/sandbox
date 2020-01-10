@@ -35,13 +35,12 @@ print(f'Decomposition to 2d array - {reprlib.repr(x2d)}')
 
 gaussian_model = naive_bayes.GaussianNB()
 svc_model = svm.SVC(kernel='linear', C=1)
-gmm_model = mixture.GaussianMixture(n_components=3)
 gauss_cv = model_selection.cross_val_score(gaussian_model, X, y, cv=5)
 svc_cv = model_selection.cross_val_score(svc_model, X, y, cv=5)
-gmm_cv = model_selection.cross_val_score(gmm_model, X, y, cv=5)
 
 print(f'Cross validation for GaussianNB = {gauss_cv}')
+print(f'Cross validation for GaussianNB mean = {gauss_cv.mean()}')
 print(f'Cross validation for SVC = {svc_cv}')
-print(f'Cross validation for GMM = {gmm_cv}')
+print(f'Cross validation for SVC mean = {svc_cv.mean()}')
 
 exit()
