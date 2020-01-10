@@ -20,7 +20,7 @@ svc_y_model = svc_model.predict(x_test)
 svc_accuracy = metrics.accuracy_score(y_test, svc_y_model)
 print(f'SVC model accuracy = {svc_accuracy}')
 
-gmm_model = mixture.GaussianMixture(n_components=3)
+gmm_model = mixture.GaussianMixture(n_components=4)
 gmm_model.fit(x_train, y_train)
 gmm_y_model = gmm_model.predict(x_test)
 
@@ -32,3 +32,16 @@ decomposition_model.fit(x_train)
 x2d = decomposition_model.transform(x_train)
 
 print(f'Decomposition to 2d array - {reprlib.repr(x2d)}')
+
+gaussian_model = naive_bayes.GaussianNB()
+svc_model = svm.SVC(kernel='linear', C=1)
+gmm_model = mixture.GaussianMixture(n_components=3)
+gauss_cv = model_selection.cross_val_score(gaussian_model, X, y, cv=5)
+svc_cv = model_selection.cross_val_score(svc_model, X, y, cv=5)
+gmm_cv = model_selection.cross_val_score(gmm_model, X, y, cv=5)
+
+print(f'Cross validation for GaussianNB = {gauss_cv}')
+print(f'Cross validation for SVC = {svc_cv}')
+print(f'Cross validation for GMM = {gmm_cv}')
+
+exit()
