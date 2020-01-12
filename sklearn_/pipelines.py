@@ -1,8 +1,11 @@
 from sklearn.pipeline import Pipeline
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.preprocessing import Normalizer, StandardScaler
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
 model = Pipeline([
-    ('normalizer', Normalizer()),
-    ('classifier', MultinomialNB())
+    PolynomialFeatures, LinearRegression
 ])
+
+
+def build_dataset():
+    x = list(range(100))
