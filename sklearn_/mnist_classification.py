@@ -1,5 +1,3 @@
-import sklearn
+from sklearn.datasets import fetch_openml
 
-mnist = sklearn.datasets.fetch_mldata('MNIST original')
-
-x, y = mnist['data'], mnist['target']
+x, y = fetch_openml('MNIST original', return_X_y=True)

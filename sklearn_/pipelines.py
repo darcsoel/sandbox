@@ -1,11 +1,10 @@
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.datasets import make_classification
 
-model = Pipeline([
-    PolynomialFeatures, LinearRegression
-])
+model = make_pipeline(
+    StandardScaler, LinearRegression
+)
 
-
-def build_dataset():
-    x = list(range(100))
+x, y = make_classification(random_state=42)
