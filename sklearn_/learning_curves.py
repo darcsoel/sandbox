@@ -51,10 +51,10 @@ def render_learning_curve(train_sizes, train_scores, test_scores, fit_times, sub
 
 
 if __name__ == '__main__':
-    # x, y = make_regression(random_state=42)
-    # train_sizes, train_scores, test_scores, fit_times, _ = learning_curve(LinearRegression(), x, y, cv=7,
-    #                                                                       n_jobs=5, return_times=True)
-    # render_learning_curve(train_sizes, train_scores, test_scores, fit_times, 0)
+    x, y = make_regression(random_state=42)
+    train_sizes, train_scores, test_scores, fit_times, _ = learning_curve(LinearRegression(), x, y, cv=7,
+                                                                          n_jobs=5, return_times=True)
+    render_learning_curve(train_sizes, train_scores, test_scores, fit_times, 0)
 
     x, y = make_regression(random_state=42)
     x = x * 10
