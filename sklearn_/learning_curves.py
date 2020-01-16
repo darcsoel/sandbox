@@ -57,9 +57,9 @@ if __name__ == '__main__':
     render_learning_curve(train_sizes, train_scores, test_scores, fit_times, 0)
 
     x, y = make_regression(random_state=42)
-    x = x * 10
+    x *= 10
     x = x.astype(int)
-    y = y * 10
+    y *= 10
     y = y.astype(int)
     train_sizes, train_scores, test_scores, fit_times, _ = learning_curve(LogisticRegression(), x, y, cv=2,
                                                                           n_jobs=2, return_times=True, verbose=3)
