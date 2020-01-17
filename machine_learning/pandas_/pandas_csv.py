@@ -48,3 +48,5 @@ print(most_pop_women_name)
 
 names = pd.crosstab(data['Name'], data['Sex'])
 print(names)
+
+exit()

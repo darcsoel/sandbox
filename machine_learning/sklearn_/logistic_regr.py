@@ -24,3 +24,5 @@ print(model.predict(test))
 
 test = [[500]]
 print(model.predict(test))
+
+exit()

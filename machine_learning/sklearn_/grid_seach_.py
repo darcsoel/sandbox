@@ -11,3 +11,5 @@ model = GridSearchCV(svc, param_grid={'kernel': ('linear', 'rbf'), 'C': [1, 10]}
 cv = cross_val_score(model, X, y, cv=5)
 print(cv)
 print(cv.mean())
+
+exit()

@@ -22,3 +22,5 @@ print(model.predict(test))
 
 test = [[50]]
 print(model.predict(test))
+
+exit()
