@@ -22,3 +22,5 @@ print(selection.shape)
 
 plt.scatter(selection[:, 0], selection[:, 1], s=200, facecolor='blue', alpha=0.25)
 plt.show()
+
+exit()
