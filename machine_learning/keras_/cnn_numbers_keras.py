@@ -17,9 +17,11 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=3)
-model.save('keras_cnn.h5', overwrite=True)
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6)
+model.save('keras_cnn.h5')
 
-model.predict(x_test[:4])
 
+print(model.predict(x_test[:4]))
 print(y_test[:4])
+
+exit()
