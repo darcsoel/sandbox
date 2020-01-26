@@ -1,3 +1,5 @@
+import ssl
+
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -6,10 +8,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 
 # mac os ssl certificate solving
-import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-data = fetch_20newsgroups(categories=['alt.atheism', 'talk.religion.misc'])
+data = fetch_20newsgroups(categories=['alt.atheism', 'talk.religion.misc', 'soc.religion.christian',
+                                      'comp.graphics', 'sci.med'])
 
 pipeline = Pipeline([
     ('vect', CountVectorizer()),
