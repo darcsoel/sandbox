@@ -27,3 +27,8 @@ plt.ylabel('predicted')
 plt.show()
 
 exit()
+
+# unix time util on Macbook Air without plt.show()
+# real    0m3.856s
+# user    0m3.627s
+# sys     0m0.429s
