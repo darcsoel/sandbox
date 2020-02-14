@@ -32,3 +32,8 @@ exit()
 # real    0m3.856s
 # user    0m3.627s
 # sys     0m0.429s
+
+# unix time util on Ubuntu, Intel® Core™ i5-4460, without plt.show()
+# real    0m2,197s
+# user    0m2,176s
+# sys     0m0,229s
