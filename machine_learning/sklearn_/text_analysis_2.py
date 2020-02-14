@@ -10,7 +10,7 @@ sns.set()
 
 model = make_pipeline(TfidfVectorizer(), MultinomialNB())
 
-categories = ['alt.atheism', 'talk.religion.misc', 'soc.religion.christian', 'comp.graphics', 'sci.med']
+categories = ['alt.atheism', 'talk.religion.misc', 'soc.religion.christian', 'comp.graphics', 'sci.med', 'sci.space']
 
 train = fetch_20newsgroups(categories=categories)
 test = fetch_20newsgroups(categories=categories, subset='test')
@@ -25,6 +25,12 @@ plt.xlabel('true')
 plt.ylabel('predicted')
 
 plt.show()
+
+text_to_predict = ['some space ship']
+
+label = model.predict(text_to_predict)
+print(train.target_names[label[0]])
+
 
 exit()
 
