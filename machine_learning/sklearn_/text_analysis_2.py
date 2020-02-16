@@ -39,6 +39,12 @@ exit()
 # user    0m3.627s
 # sys     0m0.429s
 
+# with predict func
+# real    0m4.434s
+# user    0m4.194s
+# sys     0m0.458s
+
+
 # unix time util on Ubuntu, Intel® Core™ i5-4460, without plt.show()
 # real    0m2,197s
 # user    0m2,176s
