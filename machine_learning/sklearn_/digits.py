@@ -30,3 +30,8 @@ print(f'Accuracy = {accuracy}')
 
 matrix = plot_confusion_matrix(model, x_test, y_test)
 plt.show()
+
+# execution time on macbook air i5 dual 1.6 (without plot)
+# real    0m4.275s
+# user    0m4.652s
+# sys     0m0.435s

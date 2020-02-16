@@ -26,11 +26,18 @@ plt.ylabel('predicted')
 
 plt.show()
 
-text_to_predict = ['some space ship']
 
-label = model.predict(text_to_predict)
-print(train.target_names[label[0]])
+def predict_text_category(text):
+    """convert phrase into list of phrases, return text label"""
 
+    label = model.predict([text])
+    return train.target_names[label[0]]
+
+
+text_to_predict = ['some space ship', 'some religion stuff', 'big red church', 'new colors']
+
+for phrase in text_to_predict:
+    print(predict_text_category(phrase))
 
 exit()
 
