@@ -50,3 +50,5 @@ plt.xlabel('Importance', fontsize=25, weight='bold')
 plt.ylabel('Features', fontsize=25, weight='bold')
 plt.title('Feature Importance', fontsize=25, weight='bold')
 plt.show()
+
+exit()
