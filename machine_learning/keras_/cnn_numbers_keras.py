@@ -20,8 +20,17 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6)
 model.save('keras_cnn.h5')
 
-
 print(model.predict(x_test[:4]))
 print(y_test[:4])
 
 exit()
+
+# unix time on macbook air I5-5250U
+# real    11m23.957s
+# user    32m19.105s
+# sys     2m9.797s
+
+# unix time on amd ryzen 5 3600
+# real    4m9,047s
+# user    18m22,199s
+# sys     0m19,405s

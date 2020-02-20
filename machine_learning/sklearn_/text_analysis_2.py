@@ -24,7 +24,7 @@ sns.heatmap(matrix.T, square=True, annot=True, xticklabels=train.target_names, y
 plt.xlabel('true')
 plt.ylabel('predicted')
 
-plt.show()
+# plt.show()
 
 
 def predict_text_category(text):
@@ -56,3 +56,8 @@ exit()
 # real    0m2,197s
 # user    0m2,176s
 # sys     0m0,229s
+
+# unit time on AMD Ryzen 5 3600 6-core with predict func
+# real    0m1,851s
+# user    0m1,871s
+# sys     0m0,327s
