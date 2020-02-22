@@ -10,8 +10,7 @@ x.drop(columns=['Survived'], axis=1, inplace=True)
 tree = DecisionTreeClassifier(random_state=241)
 tree.fit(x, y)
 
-res = tree.predict([[1, 60.5, 35, 1]])
+res = tree.predict([[1, 60.5, 35, 1], [1, 10.5, 35, 2]])
 print(res)
 
-res = tree.predict([[1, 10.5, 35, 2]])
-print(res)
+exit()

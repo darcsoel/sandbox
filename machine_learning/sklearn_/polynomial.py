@@ -8,11 +8,13 @@ from sklearn.preprocessing import PolynomialFeatures
 def main():
     """create main func to create variables in local scope"""
 
-    rng = np.random.RandomState(1)
-    x_train = 10 * rng.rand(50)
-    y_train = np.sin(x_train) + 0.1 * rng.randn(50)
+    dataset_length = 100
 
-    x_test = 10 * rng.rand(10)
+    rng = np.random.RandomState(1)
+    x_train = 10 * rng.rand(dataset_length)
+    y_train = np.sin(x_train) + 0.1 * rng.randn(dataset_length)
+
+    x_test = np.linspace(0, 10, dataset_length)
 
     model = make_pipeline(PolynomialFeatures(6), LinearRegression())
     model.fit(x_train[:, np.newaxis], y_train)
