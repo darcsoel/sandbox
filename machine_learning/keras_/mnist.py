@@ -27,10 +27,8 @@ with tf.device('GPU:0'):
     x_train = x_train[:-10000]
     y_train = y_train[:-10000]
 
-    model.compile(optimizer=keras.optimizers.RMSprop(),  # Optimizer
-                  # Loss function to minimize
+    model.compile(optimizer=keras.optimizers.RMSprop(),
                   loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-                  # List of metrics to monitor
                   metrics=['sparse_categorical_accuracy'])
 
     print('# Fit model on training data')

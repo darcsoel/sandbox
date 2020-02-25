@@ -42,10 +42,7 @@ with tf.device('CPU:0'):
     model.add(layers.Flatten())
     model.add(layers.Dense(10, activation='softmax'))
 
-    model.compile(optimizer=keras.optimizers.Adam(),  # Optimizer
-                  # Loss function to minimize
-                  loss=keras.losses.CategoricalCrossentropy(from_logits=True),
-                  # List of metrics to monitor
+    model.compile(optimizer=keras.optimizers.Adam(), loss=keras.losses.CategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
 
     model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6)

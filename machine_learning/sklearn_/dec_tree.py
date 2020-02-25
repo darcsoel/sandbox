@@ -3,6 +3,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 data = pd.read_csv('../../titanic.csv')
 
+# fare - ticket price
 x = data[['Pclass', 'Fare', 'Age', 'Sex', 'Survived']].replace('male', 2).replace('female', 1).dropna()
 y = x['Survived']
 x.drop(columns=['Survived'], axis=1, inplace=True)
