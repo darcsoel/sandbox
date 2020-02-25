@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.pipeline import make_pipeline
 
 
@@ -39,6 +39,29 @@ square_model.fit(x[:, np.newaxis], y)
 x_fit = np.linspace(0, 10, dataset_length)
 y_fit = square_model.predict(x_fit[:, np.newaxis])
 
+plt.subplot(3, 1, 1)
+plt.scatter(x, y)
+plt.plot(x_fit, y_fit)
+plt.xlim(0, 10)
+
+square_model = make_pipeline(SquareFeatures(20), Ridge(alpha=0.1))
+square_model.fit(x[:, np.newaxis], y)
+
+x_fit = np.linspace(0, 10, dataset_length)
+y_fit = square_model.predict(x_fit[:, np.newaxis])
+
+plt.subplot(3, 1, 2)
+plt.scatter(x, y)
+plt.plot(x_fit, y_fit)
+plt.xlim(0, 10)
+
+square_model = make_pipeline(SquareFeatures(20), Lasso(alpha=0.001))
+square_model.fit(x[:, np.newaxis], y)
+
+x_fit = np.linspace(0, 10, dataset_length)
+y_fit = square_model.predict(x_fit[:, np.newaxis])
+
+plt.subplot(3, 1, 3)
 plt.scatter(x, y)
 plt.plot(x_fit, y_fit)
 plt.xlim(0, 10)
