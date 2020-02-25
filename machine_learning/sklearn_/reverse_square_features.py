@@ -14,8 +14,8 @@ class ReverseSquareFeatures(BaseEstimator, TransformerMixin):
         self._centers, self._width = None, None
 
     @staticmethod
-    def _reverse_square_features(gauss_x, gauss_y, width, axis=None):
-        arg = (gauss_x - gauss_y) / width
+    def _reverse_square_features(reverse_square_x, reverse_square_y, width, axis=None):
+        arg = (reverse_square_x - reverse_square_y) / width
         return np.exp(-0.5 * np.sqrt(1 + np.sum(arg ** 2, axis)))
 
     def fit(self, fit_x, fit_y=None):
@@ -33,11 +33,11 @@ rng = np.random.RandomState(1)
 x = 10 * rng.rand(dataset_length)
 y = np.sin(x) + 0.1 * rng.randn(dataset_length)
 
-gauss_model = make_pipeline(ReverseSquareFeatures(20), LinearRegression())
-gauss_model.fit(x[:, np.newaxis], y)
+reverse_square_model = make_pipeline(ReverseSquareFeatures(20), LinearRegression())
+reverse_square_model.fit(x[:, np.newaxis], y)
 
 x_fit = np.linspace(0, 10, dataset_length)
-y_fit = gauss_model.predict(x_fit[:, np.newaxis])
+y_fit = reverse_square_model.predict(x_fit[:, np.newaxis])
 
 plt.scatter(x, y)
 plt.plot(x_fit, y_fit)
