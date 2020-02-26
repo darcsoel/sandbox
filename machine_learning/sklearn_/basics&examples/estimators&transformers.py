@@ -3,7 +3,7 @@ from sklearn.impute import SimpleImputer
 
 imputer = SimpleImputer(strategy='median')
 
-dataset = pd.read_csv('../../titanic.csv')
+dataset = pd.read_csv('../../../titanic.csv')
 dataset.drop('Cabin', axis=1, inplace=True)
 
 imputer.fit(dataset)

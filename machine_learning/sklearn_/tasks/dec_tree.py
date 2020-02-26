@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
-data = pd.read_csv('../../titanic.csv')
+data = pd.read_csv('../../../titanic.csv')
 
 # fare - ticket price
 x = data[['Pclass', 'Fare', 'Age', 'Sex', 'Survived']].replace('male', 2).replace('female', 1).dropna()

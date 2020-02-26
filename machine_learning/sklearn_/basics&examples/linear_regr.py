@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-bli = pd.read_csv('../../BetterLifeIndex2015.csv')
+bli = pd.read_csv('../../../BetterLifeIndex2015.csv')
 
 life_satisfaction = np.c_[bli['Life satisfaction']]
 rate = np.c_[bli['Employment rate']]
