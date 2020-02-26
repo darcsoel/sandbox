@@ -1,22 +1,36 @@
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
 
-# airport weather dataset
-weather_dataset = pd.read_csv('../../../BicycleWeather.csv')
 
-# how many people across bridge from east to west and vice versa
-# information about Siettle fremont bridge
-dates_dataset = pd.read_csv('../../../FremontBridge.csv', index_col='Date', parse_dates=True)
-dates_dataset = dates_dataset.resample('d', how='sum')  # summary days
-dates_dataset['Total'] = dates_dataset.sum(axis=1)
+class TrafficPredictor:
+    def __init__(self):
+        self._dates_dataset = pd.read_csv('../../../FremontBridge.csv', index_col='Date', parse_dates=True)
+        # self.weather_dataset = pd.read_csv('../../../BicycleWeather.csv')
 
-min_year = dates_dataset.index[0].year
-max_year = dates_dataset.index[-1].year
+    def summary_traffic_in_both_directions(self):
+        dates_dataset = self._dates_dataset.resample('d', how='sum')
+        dates_dataset['Total'] = dates_dataset.sum(axis=1)
+        self._dates_dataset = dates_dataset[['Total']]
+        return self
 
-holidays = USFederalHolidayCalendar().holidays(str(min_year), str(max_year))
-holidays = pd.Series(1, index=holidays, name='Holiday')
+    def _get_min_date(self):
+        return self._dates_dataset.index[0].year
 
-dates_dataset = dates_dataset.join(holidays)
-dates_dataset['Holiday'].fillna(0, inplace=True)
+    def _get_max_date(self):
+        return self._dates_dataset.index[-1].year
 
-exit()
+    def _get_holidays(self):
+        holidays = USFederalHolidayCalendar().holidays(str(self._get_min_date()), str(self._get_max_date()))
+        return pd.Series(1, index=holidays, name='Holiday')
+
+    def merge_holidays_to_traffic(self):
+        self._dates_dataset = self._dates_dataset.join(self._get_holidays())
+        self._dates_dataset['Holiday'].fillna(0, inplace=True)
+        return self
+
+
+if __name__ == '__main__':
+    predictor = TrafficPredictor()
+    predictor.summary_traffic_in_both_directions().merge_holidays_to_traffic()
+
+    exit()

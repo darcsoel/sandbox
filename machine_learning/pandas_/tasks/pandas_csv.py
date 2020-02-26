@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('../../titanic.csv')
+data = pd.read_csv('../../../titanic.csv')
 
 # LESSON_1
 male_count = data[data.Sex == 'male']['PassengerId'].value_counts()
