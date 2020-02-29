@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 
 
 class DataExtractor:
+    weather_columns_for_join = ['Rain&cold', 'PRCP', 'Dry day', 'Temp (C)', 'SNOW', 'SNWD', 'AWND']
     days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     axis = 23.44
     latitude = 47.61
@@ -49,16 +50,17 @@ class DataExtractor:
     def _prepare_weather(self):
         self._weather_dataset['TMAX'] /= 10
         self._weather_dataset['TMIN'] /= 10
-
         self._weather_dataset['Temp (C)'] = 0.5 * (self._weather_dataset['TMAX'] + self._weather_dataset['TMIN'])
 
         self._weather_dataset['PRCP'] /= 254
         self._weather_dataset['Dry day'] = (self._weather_dataset['PRCP'] == 0).astype(int)
+        self._weather_dataset['Rain&cold'] = self._weather_dataset['PRCP'] * (-0.5 * self._weather_dataset['Temp (C)'])
 
         return self
 
     def _join_weather(self):
-        self._dates_dataset = self._dates_dataset.join(self._weather_dataset[['PRCP', 'Dry day', 'Temp (C)']])
+        self._prepare_weather()
+        self._dates_dataset = self._dates_dataset.join(self._weather_dataset[self.weather_columns_for_join])
         del self._weather_dataset
         return self
 
@@ -68,7 +70,7 @@ class DataExtractor:
 
     def prepare_dataset(self):
         self._summary_traffic_in_both_directions()._merge_holidays_to_traffic()._add_labels_for_days() \
-            ._merge_daylight_hours_to_days()._prepare_weather()._join_weather()._add_counter()
+            ._merge_daylight_hours_to_days()._join_weather()._add_counter()
         self._dates_dataset.fillna(0, inplace=True)
         return self
 
@@ -98,5 +100,8 @@ if __name__ == '__main__':
 
     dataset[['Total', 'Predicted']].plot(alpha=0.5)
     plt.show()
+
+    errors = pd.Series(model.coef_, x.columns)
+    print(errors)
 
     exit()
