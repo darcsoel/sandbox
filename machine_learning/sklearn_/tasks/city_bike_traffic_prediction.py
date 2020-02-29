@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
@@ -62,12 +63,13 @@ class DataExtractor:
         return self
 
     def _add_counter(self):
-        self._dates_dataset['Annual'] = (self._dates_dataset.index - self._dates_dataset.index[0]).days
+        self._dates_dataset['Annual'] = (self._dates_dataset.index - self._dates_dataset.index[0]).days.astype(int)
         return self
 
     def prepare_dataset(self):
         self._summary_traffic_in_both_directions()._merge_holidays_to_traffic()._add_labels_for_days() \
             ._merge_daylight_hours_to_days()._prepare_weather()._join_weather()._add_counter()
+        self._dates_dataset.fillna(0, inplace=True)
         return self
 
     def split_dataset(self):
@@ -85,9 +87,16 @@ class DataExtractor:
 
 
 if __name__ == '__main__':
-    x, y = DataExtractor().prepare_dataset().split_dataset()
+    data = DataExtractor().prepare_dataset()
+    dataset = data.dataset
+    x, y = data.split_dataset()
 
     model = LinearRegression(fit_intercept=False)
     model.fit(x, y)
+
+    dataset['Predicted'] = model.predict(x)
+
+    dataset[['Total', 'Predicted']].plot(alpha=0.5)
+    plt.show()
 
     exit()
