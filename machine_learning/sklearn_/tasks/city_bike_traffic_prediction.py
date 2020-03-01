@@ -3,10 +3,12 @@ import numpy as np
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
 from sklearn.linear_model import LinearRegression
+from sklearn.utils import resample
 
 
 class DataExtractor:
-    weather_columns_for_join = ['Rain&cold', 'PRCP', 'Dry day', 'Temp (C)', 'SNOW', 'SNWD', 'AWND']
+    weather_columns_for_join = ['PRCP', 'Dry day', 'Temp (C)', 'SNOW', 'SNWD', 'AWND', 'TMAX', 'TMIN']
+    location = 'SEATTLE TACOMA INTERNATIONAL AIRPORT WA US'
     days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     axis = 23.44
     latitude = 47.61
@@ -48,13 +50,13 @@ class DataExtractor:
         return self
 
     def _prepare_weather(self):
+        self._weather_dataset = self._weather_dataset[self._weather_dataset['STATION_NAME'] == self.location]
         self._weather_dataset['TMAX'] /= 10
         self._weather_dataset['TMIN'] /= 10
         self._weather_dataset['Temp (C)'] = 0.5 * (self._weather_dataset['TMAX'] + self._weather_dataset['TMIN'])
 
         self._weather_dataset['PRCP'] /= 254
         self._weather_dataset['Dry day'] = (self._weather_dataset['PRCP'] == 0).astype(int)
-        self._weather_dataset['Rain&cold'] = self._weather_dataset['PRCP'] * (-0.5 * self._weather_dataset['Temp (C)'])
 
         return self
 
@@ -93,15 +95,16 @@ if __name__ == '__main__':
     dataset = data.dataset
     x, y = data.split_dataset()
 
+    np.random.seed(1)
     model = LinearRegression(fit_intercept=False)
-    model.fit(x, y)
-
+    err = np.std([model.fit(*resample(x, y)).coef_ for i in range(1000)], 0)
     dataset['Predicted'] = model.predict(x)
 
     dataset[['Total', 'Predicted']].plot(alpha=0.5)
     plt.show()
 
-    errors = pd.Series(model.coef_, x.columns)
+    params = pd.Series(model.coef_, x.columns)
+    errors = pd.DataFrame({'params': params.round(0), 'err': err.round(0)})
     print(errors)
 
     exit()
