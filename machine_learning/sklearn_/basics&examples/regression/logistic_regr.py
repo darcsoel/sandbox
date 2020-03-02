@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 
-bli = pd.read_csv('../../../BetterLifeIndex2015.csv')
+bli = pd.read_csv('../../../../BetterLifeIndex2015.csv')
 bli['Life satisfaction'] *= 10
 bli['Employment rate'] *= 10
 
