@@ -21,17 +21,16 @@ pca = PCA(svd_solver='randomized', whiten=True)
 svc = SVC(kernel='rbf', class_weight='balanced')
 model = make_pipeline(pca, svc)
 
-parameters = {'pca__n_components': list(range(40, 140, 5)),
+parameters = {'pca__n_components': list(range(50, 110, 5)),
               'svc__C': [1e3, 5e3, 1e4, 5e4, 6e4, 1e5],
-              'svc__gamma': np.linspace(0.001, 0.1, 100)}
+              'svc__gamma': np.linspace(0.001, 0.1, 50)}
 
 grid = GridSearchCV(model, parameters, n_jobs=3, verbose=3)
 grid.fit(x_train, y_train)
 
 print(f'best params {grid.best_params_}')
 
-model = grid.best_estimator_
-test_model = model.predict(x_test)  # another option - grid.predict(x_test)
+test_model = grid.predict(x_test)  # another option - grid.predict(x_test)
 accuracy = accuracy_score(y_test, test_model)
 print('accuracy = {0:.2f} percents'.format(accuracy * 100))
 
