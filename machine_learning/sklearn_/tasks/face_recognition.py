@@ -1,3 +1,4 @@
+from sys import exit
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -30,7 +31,7 @@ grid.fit(x_train, y_train)
 
 print(f'best params {grid.best_params_}')
 
-test_model = grid.predict(x_test)  # another option - grid.predict(x_test)
+test_model = grid.predict(x_test)
 accuracy = accuracy_score(y_test, test_model)
 print('accuracy = {0:.2f} percents'.format(accuracy * 100))
 

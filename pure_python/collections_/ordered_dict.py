@@ -1,4 +1,5 @@
 import collections
+from sys import exit
 
 ordered = collections.OrderedDict()
 
@@ -10,3 +11,5 @@ print(ordered)
 ordered.move_to_end('9')
 
 print(ordered)
+
+exit()
