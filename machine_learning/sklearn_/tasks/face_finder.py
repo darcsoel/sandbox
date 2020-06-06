@@ -1,7 +1,10 @@
 from sys import exit
 
 import matplotlib.pyplot as plt
-from skimage import color, data, feature
+from skimage import color, data, feature, transform
+from sklearn.datasets import fetch_lfw_people
+
+from sklearn.feature_extraction.image import PatchExtractor
 
 
 def extract_hog():
@@ -21,6 +24,12 @@ def extract_hog():
 
 
 def main():
+    faces = fetch_lfw_people()
+    positive_faces = faces.images
+
+    negative_topics = ['camera', 'coins', 'text', 'page', 'clock', 'moon', 'coffee']
+    negative_images = color.rgb2gray(getattr(data, name)() for name in negative_topics)
+
     pass
 
 
