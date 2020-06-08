@@ -23,6 +23,10 @@ def extract_hog():
     plt.show()
 
 
+def extract_patches(image, N, scale):
+    pass
+
+
 def main():
     faces = fetch_lfw_people()
     positive_faces = faces.images
