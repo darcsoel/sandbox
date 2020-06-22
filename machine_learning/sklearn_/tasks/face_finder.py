@@ -3,7 +3,7 @@ from sys import exit
 import matplotlib.pyplot as plt
 from skimage import color, data, feature, transform
 from sklearn.datasets import fetch_lfw_people
-
+import numpy as np
 from sklearn.feature_extraction.image import PatchExtractor
 
 
@@ -23,8 +23,15 @@ def extract_hog():
     plt.show()
 
 
-def extract_patches(image, N, scale):
-    pass
+def extract_patches(image, quantity, patch_size, scale=1):
+    extracted_patch_size = tuple((float(scale) * np.array(patch_size)).astype(int))
+    extractor = PatchExtractor(extracted_patch_size, quantity, random_state=0)
+    patches = extractor.transform(image[np.newaxis])
+
+    if scale != 1:
+        patches = np.array([transform.resize(patch, patch_size) for patch in patches])
+
+    return patches
 
 
 def main():
