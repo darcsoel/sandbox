@@ -27,10 +27,10 @@ class ShamirSecretEncoder(ShamirSecretBasic):
 
         self._keys = []
         self._phrase = phrase
+        self.numeric_phrase = None
 
     def _int_from_string(self, s):
-        bytes_ = s.encode('utf-8')
-        return self._int_from_bytes(bytes_)
+        return self._int_from_bytes(s.encode('utf-8'))
 
     @staticmethod
     def _int_from_bytes(bytes_):
@@ -79,7 +79,6 @@ class ShamirSecretEncoder(ShamirSecretBasic):
             raise ValueError('Can not encrypt. String value too big')
 
         numeric_phrase = Mod(numeric_phrase, self.big_number_base_encrypt)
-
         polynomial = self._build_first_keys(numeric_phrase)
         keys = self._build_polynomial_keys(polynomial)
 
@@ -102,7 +101,12 @@ class ShamirSecretDecoder(ShamirSecretBasic):
             keys = list(keys.values())
 
         self._keys = keys
-        self._phrase = ''
+
+    def _bytes_from_int(self):
+        pass
+
+    def _string_from_bytes(self):
+        pass
 
     def decode(self):
         """Decode bytes keys to string"""
@@ -118,7 +122,7 @@ class ShamirSecretDecoder(ShamirSecretBasic):
                 factor *= el * (el - cur).inverse()
             acc += factor * self._keys[i][1]
 
-        return bytes(str(acc)).decode('utf-8')
+        return str(acc)
 
 
 def main():
