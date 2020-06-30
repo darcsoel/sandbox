@@ -9,17 +9,17 @@ max_number = 20
 
 class Worker:
     """
-    Class demonstrate semaphore functional.
+    Class demonstrate event functional.
     """
 
-    def __init__(self, worker_name, number, semaphore=None):
+    def __init__(self, worker_name, number, event=None):
         self._worker_name = worker_name
         self._number = number
         self._semaphore = None
         self._event = None
 
-        if isinstance(semaphore, threading.BoundedSemaphore):
-            self._semaphore = semaphore
+        if isinstance(event, threading.Event):
+            self._event = event
 
     def __call__(self, *args, **kwargs):
         if self._semaphore:
@@ -33,14 +33,14 @@ class Worker:
 
 
 def main():
-    semaphore = threading.BoundedSemaphore(max_workers)
+    event = threading.Event()
     rand_number = random.randint(min_number, max_number)
 
     print(f'Max number = {rand_number}')
 
-    thread1 = threading.Thread(target=Worker('worker1', rand_number, semaphore))
-    thread2 = threading.Thread(target=Worker('worker2', rand_number, semaphore))
-    thread3 = threading.Thread(target=Worker('worker3', rand_number, semaphore))
+    thread1 = threading.Thread(target=Worker('worker1', rand_number, event))
+    thread2 = threading.Thread(target=Worker('worker2', rand_number, event))
+    thread3 = threading.Thread(target=Worker('worker3', rand_number, event))
 
     thread1.start()
     thread2.start()

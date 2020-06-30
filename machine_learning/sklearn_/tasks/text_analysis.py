@@ -1,10 +1,12 @@
+from sys import exit
+
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import confusion_matrix
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 sns.set()
 
