@@ -4,12 +4,13 @@ from random import randint
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
-JUMP_HEIGHT = 140
+JUMP_HEIGHT = 160
 MOVE_SPEED = 100
 MIN_HEIGHT = 150
 MIN_WIDTH = 150
 GROUND_BLOCKS_DISTANCE = 100
 GROUND_BLOCKS_COUNT = 11
+GROUND_HEIGHT = 80
 COINS_COUNT = 6
 COINS_DISTANCE = 140
 
@@ -17,7 +18,7 @@ COINS_DISTANCE = 140
 class MarioWindow(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, title='Super Mario Game')
-        arcade.set_background_color(arcade.color.ANDROID_GREEN)
+        arcade.set_background_color(arcade.color.AZURE)
 
         self.score = 0
 
@@ -44,7 +45,7 @@ class MarioWindow(arcade.Window):
 
     def _create_ground(self, index):
         ground = arcade.Sprite('images/ground.png', 0.5)
-        ground.center_y = 90
+        ground.center_y = GROUND_HEIGHT
         ground.center_x = index * GROUND_BLOCKS_DISTANCE
         self.ground_list.append(ground)
 
@@ -58,7 +59,7 @@ class MarioWindow(arcade.Window):
         self.ground_list.draw()
 
         output = f"Score: {self.score}"
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 10, arcade.color.ORANGE, 18)
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.W or symbol == arcade.key.SPACE:
