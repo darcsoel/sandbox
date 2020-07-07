@@ -42,8 +42,8 @@ def main():
     thread2 = threading.Thread(target=Worker('worker2', rand_number, semaphore))
     thread3 = threading.Thread(target=Worker('worker3', rand_number, semaphore))
 
-    thread1.start()
     thread2.start()
+    thread1.start()
     thread3.start()  # sometimes it do not called
 
 
