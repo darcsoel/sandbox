@@ -1,6 +1,8 @@
 """Basic dataset"""
 
 import reprlib
+from sys import exit
+
 from sklearn import datasets, decomposition, metrics, mixture, model_selection, naive_bayes, svm
 
 X, y = datasets.load_iris(return_X_y=True)

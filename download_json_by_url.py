@@ -1,6 +1,7 @@
 import requests
 import json
 from sys import exit
+import re
 
 
 def download():
@@ -12,6 +13,9 @@ def download():
         slash = url.rindex('/')
         file_name = url[slash + 1:]
         json_text = requests.get(url)
+
+        if not re.search(r'^data_(?s:/*)'):
+            file_name = 'data_' + file_name
 
         with open(file_name, 'wb') as file:
             file.write(json_text.content)

@@ -152,7 +152,7 @@ print(generatedArray2)
 dic = {'John': 1200, 'Paul': 1000, 'Jones': 1850, 'Dorothy': 950}
 print("\n".join(["%s = %d" % (name, salary) for name, salary in dic.items()]))
 
-someFile = open('../arrayReadline.txt', 'r')
+someFile = open('../../arrayReadline.txt', 'r')
 # read() - read file as one line
 # readline() - read one line
 # readlines() - read all file as list of lines
