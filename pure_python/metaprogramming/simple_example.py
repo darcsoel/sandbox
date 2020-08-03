@@ -6,6 +6,12 @@ class FinalMeta(type):
             if issubclass(cls, class_):
                 raise TypeError(str(class_.__name__) + " is final")
 
+        print('metaclass called')
+
+    def __call__(cls, *args, **kwargs):
+        print('metaclass call() called')
+        return super().__call__(*args, **kwargs)
+
 
 class Inherited(metaclass=FinalMeta):
     def __init__(self, msg):
@@ -23,6 +29,10 @@ class Inherited(metaclass=FinalMeta):
 if __name__ == '__main__':
     x = Inherited('world')
     print(x.say_hello())
+
+    y = Inherited('second')
+    print(y.say_hello())
+
 
     # Can not create class, error while compiling pycache, class is final
 

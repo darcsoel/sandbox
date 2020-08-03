@@ -1,4 +1,5 @@
 import ssl
+from sys import exit
 
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer
@@ -31,12 +32,13 @@ parameters = {
     # 'clf__max_iter': (10, 50, 80),
 }
 
-grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1)
-grid_search.fit(data.data, data.target)
+if __name__ == '__main__':
+    grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1)
+    grid_search.fit(data.data, data.target)
 
-best_parameters = grid_search.best_estimator_.get_params()
+    best_parameters = grid_search.best_estimator_.get_params()
 
-for param_name in sorted(parameters.keys()):
-    print("\t%s: %r" % (param_name, best_parameters[param_name]))
+    for param_name in sorted(parameters.keys()):
+        print("\t%s: %r" % (param_name, best_parameters[param_name]))
 
-exit()
+    exit()
