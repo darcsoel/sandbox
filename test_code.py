@@ -1,45 +1,61 @@
-# 1,2,5,10,25,50
+"""Practice task from Python position interview"""
 
-from datetime import datetime
+
+import datetime
+import sys
 
 
 def exec_time(func):
+    """Calculate command execution time"""
+
     def wrap(*args):
-        now_start = datetime.now()
+        """Inner wrapper for logging"""
+        now_start = datetime.datetime.now()
         result = func(*args)
-        now_final = datetime.now()
-        print(now_final - now_start)
-        print(result)
+        now_final = datetime.datetime.now()
+
+        execution_time = now_final - now_start
+        print(f'Execution time = {execution_time}')
+
+        return result
 
     return wrap
 
 
 class Terminal:
+    """Emulate coins terminal"""
+
     coins = [1, 2, 5, 10, 25, 50]
 
-    def __init__(self, sum_):
-        self._sum = sum_
+    def __init__(self, sum_to_return):
+        self._sum = sum_to_return
         self._result = []
 
     @exec_time
     def give_coins(self):
+        """return coins list"""
+
         sum_ = self._sum
 
         for coin in reversed(self.coins):
             count = sum_ // coin
 
             self._result.extend([coin] * count)
-
             sum_ -= coin * count
 
-            if sum(self._result) == sum_:
+            if sum(self._result) == self._sum:
                 break
 
         return self._result
 
 
-sum__ = 199
+sum_list_to_return = [199, 74, 52, 24, 4, 1]
 
-term = Terminal(sum__)
-term.give_coins()
+if __name__ == '__main__':
+    for sum_ in sum_list_to_return:
+        term = Terminal(sum_)
 
+        coins = term.give_coins()
+        print(f'Sum to return = {sum_}. Returned coins = {coins}')
+
+    sys.exit()

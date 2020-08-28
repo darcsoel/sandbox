@@ -1,6 +1,8 @@
 /venv/
 /.idea/
+/.vscode/
 /__pycache__/*.pyc
 /*.pyc
 pure_python/*.log
 pure_python/*.txt
+data_*.json

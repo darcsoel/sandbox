@@ -1,7 +1,7 @@
-import requests
-import json
-from sys import exit
 import re
+from sys import exit
+
+import requests
 
 
 def download():
@@ -14,7 +14,7 @@ def download():
         file_name = url[slash + 1:]
         json_text = requests.get(url)
 
-        if not re.search(r'^data_(?s:/*)'):
+        if not re.search(r'^data_(?s:/*)', file_name):
             file_name = 'data_' + file_name
 
         with open(file_name, 'wb') as file:
