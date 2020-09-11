@@ -17,6 +17,7 @@ cycler==0.10.0
 decorator==4.4.2
 docutils==0.15.2
 Faker==4.0.2
+flake8==3.8.3
 future==0.18.2
 gast==0.2.2
 gensim==3.8.0
@@ -41,6 +42,7 @@ Keras-Preprocessing==1.1.0
 kiwisolver==1.1.0
 Markdown==3.1.1
 matplotlib==3.1.2
+mccabe==0.6.1
 mock==4.0.1
 mod==0.2.4
 more-itertools==8.1.0
@@ -63,7 +65,9 @@ ptyprocess==0.6.0
 py==1.8.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
+pycodestyle==2.6.0
 pydotplus==2.0.2
+pyflakes==2.2.0
 pyglet==1.5.0
 pyglet-ffmpeg2==0.1.17
 Pygments==2.5.2

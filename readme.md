@@ -11,3 +11,14 @@ If problems with basemap package:
 `sudo apt-get install libgeos-dev` 
 <br>
 `pip3 install -U git+https://github.com/matplotlib/basemap.git`
+
+
+Install flake8
+`pip3 install flake8`
+
+Enable strict and lazy check
+`git config --bool flake8.strict true`
+`git config --bool flake8.lazy true`
+
+Docs <br>
+https://flake8.pycqa.org/en/latest/user/using-hooks.html
