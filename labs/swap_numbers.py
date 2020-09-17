@@ -1,8 +1,8 @@
-from sys import exit
+import sys
 
 
 def main():
-    numbers = input('Enter whitespace-separate numbers')
+    numbers = input('Enter whitespace-separate numbers: ')
     first, second = numbers.split(' ')
 
     if not first and not second:
@@ -14,4 +14,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    exit()
+    sys.exit()

@@ -15,6 +15,7 @@ If problems with basemap package:
 
 Install flake8
 `pip3 install flake8`
+`flake8 --install-hook git`
 
 Enable strict and lazy check
 `git config --bool flake8.strict true`

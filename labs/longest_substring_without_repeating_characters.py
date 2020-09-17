@@ -4,7 +4,13 @@ long_string = 'aabcabcbbaabcabcbb'
 
 
 def find_longest_substr(string):
-    pass
+    result = []
+
+    for i in string:
+        for j in range(i, len(string)):
+            pass
+
+    return result
 
 
 if __name__ == '__main__':
