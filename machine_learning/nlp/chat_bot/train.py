@@ -1,7 +1,6 @@
 import nltk
-import keras
 
-from machine_learning.chat_bot.retrieve_datasets import DialogsRetriever
+from machine_learning.nlp.chat_bot.retrieve_datasets import DialogsRetriever
 
 nltk.download('punkt')
 nltk.download('wordnet')

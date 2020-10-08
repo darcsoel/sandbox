@@ -1,5 +1,6 @@
+import multiprocessing
+import sys
 from itertools import chain
-from sys import exit
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,6 +10,13 @@ from sklearn.feature_extraction.image import PatchExtractor
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import LinearSVC
 
+cpu_counts = multiprocessing.cpu_count()
+
+if cpu_counts < 4:
+    cpu_counts -= 1
+else:
+    cpu_counts -= 2
+
 
 def extract_hog():
     """Example function - original picture and HOG picture in one slide"""
@@ -17,7 +25,8 @@ def extract_hog():
     image = color.rgb2gray(chelsea)
     hog_vec, hog_vis = feature.hog(image, visualize=True)
 
-    fig, ax = plt.subplots(1, 2, figsize=(12, 6), subplot_kw={'xticks': [], 'yticks': []})
+    fig, ax = plt.subplots(1, 2, figsize=(12, 6), subplot_kw={'xticks': [],
+                                                              'yticks': []})
 
     ax[0].imshow(image)
     ax[0].set_title('original')
@@ -29,12 +38,14 @@ def extract_hog():
 
 
 def extract_patches(image, quantity, patch_size, scale=1.0):
-    extracted_patch_size = tuple((float(scale) * np.array(patch_size)).astype(int))
+    extracted_patch_size = tuple((float(scale) * np.array(patch_size))
+                                 .astype(int))
     extractor = PatchExtractor(extracted_patch_size, quantity, random_state=0)
     patches = extractor.transform(image[np.newaxis])
 
     if scale != 1:
-        patches = np.array([transform.resize(patch, patch_size) for patch in patches])
+        patches = np.array([transform.resize(patch, patch_size)
+                            for patch in patches])
 
     return patches
 
@@ -59,14 +70,21 @@ def main():
     topics = ['camera', 'coins', 'text', 'page', 'clock', 'moon', 'coffee']
     images = [color.rgb2gray(getattr(data, name)()) for name in topics]
 
-    negative_patches = np.vstack([extract_patches(im, 1000, positive_patches[0].shape, scale)
-                                  for im in images for scale in [0.5, 1.0, 2.0]])
+    negative_patches = np.vstack([extract_patches(im, 1000,
+                                                  positive_patches[0].shape,
+                                                  scale)
+                                  for im in images
+                                  for scale in [0.5, 1.0, 2.0]])
 
-    x_train = np.array([feature.hog(im) for im in chain(positive_patches, negative_patches)])
+    x_train = np.array([feature.hog(im) for im in chain(positive_patches,
+                                                        negative_patches)])
     y_train = np.zeros(x_train.shape[0])
     y_train[:positive_patches.shape[0]] = 1
 
-    svc_grid_score = GridSearchCV(LinearSVC(), n_jobs=3, param_grid={'C': [0.5, 1.0, 2.5, 4.0, 5.5]})
+    c_param_grid = [0.5, 1.0, 2.5, 4.0, 5.5]
+    svc_grid_score = GridSearchCV(LinearSVC(), n_jobs=cpu_counts,
+                                  param_grid={'C': c_param_grid})
+
     svc_grid_score.fit(x_train, y_train)
     print(f'Best grid score = {svc_grid_score.best_score_}')
 
@@ -81,7 +99,9 @@ def main():
     plt.axis('off')
     plt.show()
 
-    indices, patches = zip(*searching_frame(test_image, positive_patches[0].shape))
+    indices, patches = zip(*searching_frame(test_image,
+                                            positive_patches[0].shape))
+
     patches_hog = np.array([feature.hog(patch) for patch in patches])
 
     labels = model.predict(patches_hog)
@@ -94,11 +114,12 @@ def main():
     indices = np.array(indices)
 
     for i, j in indices[labels == 1]:
-        ax.add_patch(plt.Rectangle((j, i), n_j, n_i, edgecolor='red', alpha=0.2, facecolor='none'))
+        ax.add_patch(plt.Rectangle((j, i), n_j, n_i, edgecolor='red',
+                                   alpha=0.2, facecolor='none'))
 
     plt.show()
 
 
 if __name__ == '__main__':
     main()
-    exit()
+    sys.exit()

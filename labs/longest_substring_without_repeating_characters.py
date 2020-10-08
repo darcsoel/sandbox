@@ -4,13 +4,27 @@ long_string = 'aabcabcbbaabcabcbb'
 
 
 def find_longest_substr(string):
-    result = []
+    """Search longest substring without char repetition"""
 
-    for i in string:
-        for j in range(i, len(string)):
-            pass
+    results = []
 
-    return result
+    for index, _ in enumerate(string):
+        result = []
+
+        for char_index in range(index, len(string)):
+            if string[char_index] in result:
+                break
+            else:
+                result.append(string[char_index])
+
+        results.append(result)
+
+    stringify = []
+
+    for r in results:
+        stringify.append(''.join(r))
+
+    return max(stringify, key=len)
 
 
 if __name__ == '__main__':

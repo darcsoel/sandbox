@@ -9,7 +9,9 @@ model.fit(digits)
 
 transformed = model.transform(digits)
 
-plt.scatter(transformed[:, 0], transformed[:, 1], c=label, alpha=0.5, cmap='rainbow')
+plt.scatter(transformed[:, 0], transformed[:, 1], c=label, alpha=0.5,
+            cmap='rainbow')
+
 plt.xlabel('component1')
 plt.ylabel('component2')
 plt.colorbar()

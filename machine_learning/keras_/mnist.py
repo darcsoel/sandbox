@@ -1,11 +1,13 @@
-import tensorflow as tf
+import sys
+
+# import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-gpu_devices = tf.config.experimental.list_physical_devices('GPU')
-cpu_devices = tf.config.experimental.list_physical_devices('CPU')
+# gpu_devices = tf.config.experimental.list_physical_devices('GPU')
+# cpu_devices = tf.config.experimental.list_physical_devices('CPU')
 
-with tf.device('GPU:0'):
+if __name__ == '__main__':
     inputs = keras.Input(shape=(784,), name='digits')
     x = layers.Dense(64, activation='relu', name='dense_1')(inputs)
     x = layers.Dense(64, activation='relu', name='dense_2')(x)
@@ -28,7 +30,8 @@ with tf.device('GPU:0'):
     y_train = y_train[:-10000]
 
     model.compile(optimizer=keras.optimizers.RMSprop(),
-                  loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                  loss=keras.losses.SparseCategoricalCrossentropy(
+                      from_logits=True),
                   metrics=['sparse_categorical_accuracy'])
 
     print('# Fit model on training data')
@@ -52,4 +55,4 @@ with tf.device('GPU:0'):
     predictions = model.predict(x_test[:3])
     print('predictions shape:', predictions.shape)
 
-exit()
+    sys.exit()
