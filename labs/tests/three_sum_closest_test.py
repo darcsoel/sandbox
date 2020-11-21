@@ -12,6 +12,11 @@ class ThreeElementsSumValidTestCase(unittest.TestCase):
         result = ThreeElementsSumClosest([-1, 2, 1, -4]).find(1)
         self.assertEqual(result, 2)
 
+    def test_valid_pairs_with_equal_closest(self):
+        numbers = [1, 2, -2, -1, 5, -4, 5, 1, -4]
+        result = ThreeElementsSumClosest(numbers, 0).find()
+        self.assertEqual(result, 5)
+
 
 class ThreeElementsSumInvalidTestCase(unittest.TestCase):
     def test_invalid_type(self):
