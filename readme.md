@@ -4,7 +4,8 @@ You need Python 3.7 to run async code
 
 Folder `pure_python` contains legacy code, it need refactoring
 
-`sudo apt-get install graphviz` - for use graphic library
+For use graphic library <br>
+`sudo apt-get install graphviz`
 
 If problems with basemap package:
 
@@ -13,12 +14,15 @@ If problems with basemap package:
 `pip3 install -U git+https://github.com/matplotlib/basemap.git`
 
 
-Install flake8
-`pip3 install flake8`
+For launch GUI tkinter <br>
+`sudo apt-get install python3-tk`
+
+Install flake8 <br>
+`pip3 install flake8` <br>
 `flake8 --install-hook git`
 
-Enable strict and lazy check
-`git config --bool flake8.strict true`
+Enable strict and lazy check <br>
+`git config --bool flake8.strict true` <br>
 `git config --bool flake8.lazy true`
 
 Docs <br>
