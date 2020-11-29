@@ -20,17 +20,25 @@ if __name__ == '__main__':
 
     model = keras.models.Sequential()
 
-    model.add(layers.Conv2D(64, kernel_size=3, input_shape=(28, 28, 1),
+    model.add(layers.Conv2D(64, kernel_size=3,
+                            input_shape=(28, 28, 1),
                             activation='relu'))
+
     model.add(layers.Conv2D(32, kernel_size=3, activation='relu'))
+
     model.add(layers.Flatten())
+
     model.add(layers.Dense(10, activation='softmax'))
 
     model.compile(optimizer=keras.optimizers.Adam(),
                   loss=keras.losses.CategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
 
-    model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6)
+    model.fit(x_train, y_train,
+              validation_data=(x_test, y_test),
+              epochs=6,
+              workers=4)
+
     model.save('keras_cnn.h5')
 
     print(model.predict(x_test[:4]))
