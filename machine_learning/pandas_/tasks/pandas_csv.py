@@ -35,15 +35,11 @@ Without param it will return matrix - all to all correlations
 pearsonn_corr = data['SibSp'].corr(data['Parch'])
 print(f'Pearsonn correlation = {pearsonn_corr}')
 
-women_data = data[data['Name'].str.contains('Mrs')]
 
-"""
-Return wrong data but works fine
-Error in data, some male names have female sex
-Need to fix somehow
+data['first_name'] = data['Name'].str.extract(r'(\.\s.[a-z]+)', expand=False)
+data['first_name'] = data['first_name'].str.replace('. ', '')
 
-"""
-most_pop_women_name = data[data['Sex'] == 'female']['Name']\
+most_pop_women_name = data[data['Sex'] == 'female']['first_name']\
     .value_counts().idxmax()
 print(f'Most popular women name = {most_pop_women_name}')
 
