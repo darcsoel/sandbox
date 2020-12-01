@@ -69,7 +69,4 @@ if __name__ == '__main__':
         .value_counts().idxmax()
     print(f'Most popular women name = {most_pop_women_name}')
 
-    names = pd.crosstab(data['Name'], data['Sex'])
-    print(names)
-
     sys.exit()
