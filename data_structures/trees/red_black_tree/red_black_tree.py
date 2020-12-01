@@ -1,6 +1,7 @@
 from random import sample
+
+from .env import BLACK
 from .node import Node
-from .env import *
 
 
 class RedBlackTree:
@@ -17,8 +18,15 @@ class RedBlackTree:
 
         node = Node(value=value, color=BLACK)
 
-        if self._case1(node):
-            pass
+        while True:
+            try:
+                self._case1(node)
+                self._case2(node)
+                self._case3(node)
+                self._case4(node)
+                self._case5(node)
+            except StopIteration:
+                break
 
     def find(self, node, parent_node: Node = None) -> Node:
         """
@@ -52,7 +60,7 @@ class RedBlackTree:
             self.root = node
             return True
 
-        return False
+        raise StopIteration
 
     def _case2(self, node: Node, parent_node: Node = None) -> bool:
         """
@@ -92,7 +100,7 @@ class RedBlackTree:
         """
         pass
 
-    def _case4(self, value, parent_node):
+    def _case4(self, value):
         """
         Father if red, uncle is black
         New node is right child, parent is left child
@@ -104,7 +112,7 @@ class RedBlackTree:
         """
         pass
 
-    def _case5(self, value, parent_node):
+    def _case5(self, value):
         """
         Father if red, uncle is black
         New node is left child, parent is left child

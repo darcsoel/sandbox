@@ -1,4 +1,4 @@
-from .env import *
+from .env import RED, BLACK, NIL
 
 
 class Node:
@@ -8,12 +8,29 @@ class Node:
 
     """
 
-    def __init__(self, color=RED, value=None, left_child=None, right_child=None, parent=None):
+    def __init__(self, color=RED, value=None, left_child=None,
+                 right_child=None, parent=None):
+        """At start - node always red, recolor on condition"""
+        self._check_color(color)
+
         self.color = color
         self.value = value
         self.parent = parent
-        self.left_child = left_child if left_child else Node(color=BLACK, parent=value)
-        self.right_child = right_child if right_child else Node(color=BLACK, parent=value)
+
+        self.left_child = left_child or self.setup_empty_child(value)
+        self.right_child = right_child or self.setup_empty_child(value)
+
+    @staticmethod
+    def _check_color(color):
+        if color in [BLACK, RED]:
+            return True
+        raise ValueError(f'wrong element color - {color}')
+
+    def setup_empty_child(self, parent):
+        return Node(color=BLACK, parent=parent, value=NIL)
+
+    def is_has_children(self):
+        return self.left_child is NIL and self.right_child is NIL
 
     def __lt__(self, other):
         return self.value < other.value
