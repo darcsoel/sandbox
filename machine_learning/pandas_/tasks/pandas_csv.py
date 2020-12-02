@@ -1,6 +1,8 @@
 import sys
 
 import pandas as pd
+import seaborn as sn
+import matplotlib.pyplot as plt
 
 
 # not sure, maybe need refactoring
@@ -34,6 +36,10 @@ def find_first_name(name):
 
 if __name__ == '__main__':
     data = pd.read_csv('../../../titanic.csv')
+
+    corr_matrix = data.corr()
+    sn.heatmap(corr_matrix, annot=True)
+    plt.show()
 
     # LESSON_1
     male_count = data[data.Sex == 'male']['PassengerId'].value_counts()
