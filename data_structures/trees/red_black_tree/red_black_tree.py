@@ -5,6 +5,10 @@ from .node import Node
 
 
 class RedBlackTree:
+    """
+    Red-black tree implementation
+    """
+
     def __init__(self):
         self.root = None
 
@@ -16,40 +20,32 @@ class RedBlackTree:
         :return:
         """
 
-        node = Node(value=value, color=BLACK)
+        node = Node(value=value)
+        self._case1(node)
 
-        while True:
-            try:
-                self._case1(node)
-                self._case2(node)
-                self._case3(node)
-                self._case4(node)
-                self._case5(node)
-            except StopIteration:
-                break
-
-    def find(self, node, parent_node: Node = None) -> Node:
+    def find(self, node) -> Node:
         """
         Find node with needed value
 
         :param node: search value
-        :param parent_node: parent node, root default
         :return: Node
         """
-        if parent_node is None:
+        if node.parent_node is None:
             parent_node = self.root
+        else:
+            parent_node = node.parent
 
         if node < parent_node:
-            return self.find(node, parent_node.left_child)
+            return self.find(node.left_child)
         elif node > parent_node:
-            return self.find(node, parent_node.right_child)
+            return self.find(node.right_child)
 
         if node == parent_node:
             return parent_node
-        else:
-            raise KeyError('Value not exist')
 
-    def _case1(self, node: Node) -> bool:
+        raise KeyError('Value not exist')
+
+    def _case1(self, node: Node):
         """
         Case if node is root
 
@@ -57,10 +53,11 @@ class RedBlackTree:
         :return: None
         """
         if self.root is None:
+            node.color = BLACK
             self.root = node
-            return True
+            return
 
-        raise StopIteration
+        self._case2(node)
 
     def _case2(self, node: Node, parent_node: Node = None) -> bool:
         """

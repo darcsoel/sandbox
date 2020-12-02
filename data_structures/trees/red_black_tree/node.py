@@ -30,7 +30,7 @@ class Node:
         return Node(color=BLACK, parent=parent, value=NIL)
 
     def is_has_children(self):
-        return self.left_child is NIL and self.right_child is NIL
+        return self.left_child == NIL and self.right_child == NIL
 
     def __lt__(self, other):
         return self.value < other.value
