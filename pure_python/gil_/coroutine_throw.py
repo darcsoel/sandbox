@@ -1,53 +1,39 @@
 from sys import exit
 
 
-def coroutine(initial_value=None):
-    enter_value = None
-
-    try:
-        enter_value = yield enter_value
-
-        if not enter_value:
-            enter_value = initial_value
-
-        print(f'Coroutine inner value = {enter_value}')
-
-    except GeneratorExit:
-        print('Job stopped successfully')
+def coroutine():
+    while True:
+        enter_value = yield
+        yield enter_value
 
 
-def coroutine_modern(initial_value=None):
-    enter_value = None
+def test_generator(iterable):
+    yield iterable
 
-    try:
-        enter_value = yield from enter_value
 
-        if not enter_value:
-            enter_value = initial_value
-
-        print(f'Coroutine inner value = {enter_value}')
-
-    except GeneratorExit:
-        print('Job stopped successfully')
+def coroutine_modern():
+    while True:
+        enter_value = yield
+        yield from enter_value
 
 
 if __name__ == '__main__':
-    worker = coroutine('test')
-    x1 = next(worker)
+    worker = coroutine()
+    next(worker)
+    x1 = worker.send('test1')
     print(f'Coroutine outer value = {x1}')
 
     try:
         worker.throw(ValueError)
     except ValueError:
-        print('Raise error from coroutine')
+        print('Raise error from coroutine\n')
     finally:
         worker.close()
 
-    worker = coroutine_modern('test new')
-    x1 = next(worker)
-    print(f'Coroutine outer value = {x1}')
-
-    worker.throw(ValueError)
+    worker = coroutine_modern()
+    next(worker)
+    x1 = worker.send(['test new', 'test new 2'])
+    print(f'[Coroutine modern] outer value = {x1}')
     worker.close()
 
     exit()
