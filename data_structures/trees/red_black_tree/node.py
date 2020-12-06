@@ -1,4 +1,6 @@
-from .env import RED, BLACK, NIL
+"""Node entity data structure"""
+
+from data_structures.trees.red_black_tree.env import BLACK, NIL, RED
 
 
 class Node:
@@ -26,11 +28,22 @@ class Node:
             return True
         raise ValueError(f'wrong element color - {color}')
 
-    def setup_empty_child(self, parent):
+    @staticmethod
+    def setup_empty_child(parent):
+        """Set NIL value for node"""
         return Node(color=BLACK, parent=parent, value=NIL)
 
     def is_has_children(self):
-        return self.left_child == NIL and self.right_child == NIL
+        """Check if children are diff from NIL"""
+        return self.left_child != NIL and self.right_child != NIL
+
+    def is_red(self):
+        """Check if node id red"""
+        return self.color == RED
+
+    def is_black(self):
+        """Check if node id black"""
+        return self.color == BLACK
 
     def __lt__(self, other):
         return self.value < other.value
@@ -39,4 +52,15 @@ class Node:
         return self.value > other.value
 
     def __eq__(self, other):
-        return self.value == other.value
+        if self.color == NIL and self.color == other.color:
+            return True
+
+        if self.parent is None or other.parent is None:
+            parents_same = self.parent is None and other.parent is None
+        else:
+            parents_same = self.parent.value == other.parent.value \
+                               and self.parent.color == other.parent.color
+
+        node_same = self.value == other.value and self.color == other.color
+
+        return node_same and parents_same
