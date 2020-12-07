@@ -1,7 +1,14 @@
+"""Red-Black tree implementation"""
+
+import logging
 from random import sample
 
-from .env import BLACK
-from .node import Node
+from data_structures.trees.red_black_tree.env import BLACK, LEFT_ROTATION, \
+    RIGHT_ROTATION
+from data_structures.trees.red_black_tree.node import Node
+
+logging.basicConfig(filename='red-black_tree.log', filemode='w+',
+                    format='%(name) - $(levelname) - %(message)')
 
 
 class RedBlackTree:
@@ -22,6 +29,7 @@ class RedBlackTree:
 
         node = Node(value=value)
         self._case1(node)
+        self.balance(node)
 
     def find(self, node) -> Node:
         """
@@ -45,11 +53,16 @@ class RedBlackTree:
 
         raise KeyError('Value not exist')
 
+    def balance(self, node):
+        """Balance tree after add/delete"""
+
+        pass
+
     def _case1(self, node: Node):
         """
         Case if node is root
 
-        :param node: int
+        :param node: Node
         :return: None
         """
         if self.root is None:
@@ -59,41 +72,39 @@ class RedBlackTree:
 
         self._case2(node)
 
-    def _case2(self, node: Node, parent_node: Node = None) -> bool:
+    def _case2(self, node: Node):
         """
         Case if father is black
 
-        :param node: int
-        :param parent_node: Node | None
-        :return: bool
+        :param node: Node
+        :return: None
         """
+
         if self.root is None:
             raise ValueError('root element is not defined')
 
-        if parent_node is None:
-            parent_node = self.root
-
-        if node > parent_node.value:
-            if parent_node.right_child.value is not None:
-                self._case2(node, parent_node.right_child)
+        if node > node.parent.value:
+            if node.parent.right_child.value is not None:
+                self._case2(node.parent.right_child)
             else:
-                parent_node.right_child = Node(value=node, parent=parent_node)
+                node.parent.right_child = Node(value=node)
+                return
         else:
-            if parent_node.left_child.value is not None:
-                self._case2(node, parent_node.left_child)
+            if node.parent.left_child.value is not None:
+                self._case2(node.parent.left_child)
             else:
-                parent_node.left_child = Node(value=node, parent=parent_node)
+                node.parent.left_child = Node(value=node)
+                return
 
-        return True
+        self._case3(node)
 
     def _case3(self, value, parent_node=None):
         """
         Case if father and uncle are red
         Recolor both to black and recolor grandfather
 
-        :param value: int
-        :param parent_node: Node | None
-        :return: bool
+        :param node: Node
+        :return: None
         """
         pass
 
@@ -103,8 +114,7 @@ class RedBlackTree:
         New node is right child, parent is left child
         Make left rotate
 
-        :param value: int
-        :param parent_node: Node
+        :param node: Node
         :return: None
         """
         pass
@@ -115,14 +125,13 @@ class RedBlackTree:
         New node is left child, parent is left child
         Make right rotate with grandfather
 
-        :param value: int
-        :param parent_node: Node
+        :param node: Node
         :return: None
         """
         pass
 
     @staticmethod
-    def _rotate(node: Node, direction: int = -1) -> None:
+    def _rotate(node: Node, direction: str = 'left') -> None:
         """
         Rotate peace of tree
         Child and direction is linked, depends on direction
@@ -131,20 +140,25 @@ class RedBlackTree:
         :param direction: -1 - left, 1 - right
         :return: None
         """
-        if direction < 0:
+        if direction == LEFT_ROTATION:
             parent = node.parent
             rotator = node
             child = node.right_child
 
             parent.left_child = child
             child.left_child = rotator
-        else:
+        elif direction == RIGHT_ROTATION:
             parent = node.parent
             rotator = node
             child = node.left_child
 
             parent.left_child = child
             child.left_child = rotator
+        else:
+            msg = 'unknown rotation direction'
+            logging.error(f'msg. supported options: {LEFT_ROTATION}, '
+                          f'{RIGHT_ROTATION}')
+            raise ValueError(msg)
 
 
 if __name__ == '__main__':
