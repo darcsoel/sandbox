@@ -6,3 +6,6 @@
 pure_python/*.log
 pure_python/*.txt
 data_*.json
+
+result_movie_profile.csv
+result_user_profile.csv
