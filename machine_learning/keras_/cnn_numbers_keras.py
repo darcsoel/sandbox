@@ -1,9 +1,3 @@
-"""
-Simple Keras NN for recognise simple images of numbers
-Running on CPU or GPU
-
-"""
-
 import sys
 
 from tensorflow import keras

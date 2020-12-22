@@ -1,11 +1,8 @@
 import sys
 
-# import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-# gpu_devices = tf.config.experimental.list_physical_devices('GPU')
-# cpu_devices = tf.config.experimental.list_physical_devices('CPU')
 
 if __name__ == '__main__':
     inputs = keras.Input(shape=(784,), name='digits')
