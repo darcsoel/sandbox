@@ -8,10 +8,13 @@ import pandas as pd
 
 class DataParser:
     def __init__(self):
-        self._movies = pd.read_csv('../../../movies_metadata.csv')
-        # replace with ratings.csv for full calculations,
-        # but it takes a lot of time
-        self._ratings = pd.read_csv('../../../ratings_small.csv')
+        self._movies = pd.read_csv('movies_metadata.csv')
+        self._ratings = pd.read_csv('ratings_small.csv', )
+
+        median_rating = self._ratings['rating'].median()
+        mean_rating = self._ratings['rating'].mean()
+        self._good_rating = mean_rating - abs(mean_rating - median_rating)
+
         self._user_profile = pd.DataFrame()
         self._movie_profile = pd.DataFrame()
 
@@ -43,22 +46,17 @@ class DataParser:
         return diff.days / 365
 
     @staticmethod
-    def average_review_time_diff(timestamps):
+    def average_review_time_diff(timestamps: pd.DataFrame):
         # if zero or one review - there is no average diff
         if len(timestamps) < 2:
             return 0
 
         timestamps = timestamps.reset_index().sort_values('timestamp')
-        diff_count = len(timestamps) - 1
-        diff_list = []
-
-        for index in range(1, len(timestamps)):
-            prev = timestamps.loc[index - 1]['timestamp']
-            current = timestamps.loc[index]['timestamp']
-            diff_list.append(current - prev)
-
-        result = pd.Series(diff_list).sum().days / diff_count
-        return abs(result)
+        timestamps['shift'] = timestamps['timestamp'].shift()
+        timestamps['shift'][0] = timestamps['timestamp'].iloc[-1]
+        timestamps['diff'] = (timestamps['timestamp'] - timestamps['shift']) \
+            .abs()
+        return timestamps['diff'].sum().days / timestamps['diff'].size
 
     @staticmethod
     def get_favourite_genre(data):
@@ -147,7 +145,8 @@ class DataParser:
 
     def _get_user_favourite_genres(self):
         favorite_genres = self._ratings[['user_id', 'movie_id', 'rating']]
-        favorite_genres = favorite_genres[favorite_genres['rating'] >= 3.8]
+        mask = favorite_genres['rating'] >= self._good_rating
+        favorite_genres = favorite_genres[mask]
         favorite_genres.set_index('movie_id', inplace=True)
 
         genres = self._movie_profile[['genres']]
@@ -176,10 +175,10 @@ class DataParser:
 
     def export(self):
         if not self._movie_profile.empty:
-            self._movie_profile.to_csv('../../../result_movie_profile.csv')
+            self._movie_profile.to_csv('result_movie_profile.csv')
 
         if not self._user_profile.empty:
-            self._user_profile.to_csv('../../../result_user_profile.csv')
+            self._user_profile.to_csv('result_user_profile.csv')
 
 
 if __name__ == '__main__':
