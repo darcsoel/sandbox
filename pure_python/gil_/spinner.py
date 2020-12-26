@@ -1,7 +1,7 @@
-import sys
 import itertools
-import time
+import sys
 import threading
+import time
 
 
 class Spinner:
