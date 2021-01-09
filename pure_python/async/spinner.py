@@ -9,11 +9,12 @@ async def spinner():
     for char in itertools.cycle('|/-\\'):
         write(char)
         flush()
-        write('\x08')
 
         try:
             await asyncio.sleep(.1)
+            write('\x08')
         except asyncio.CancelledError:
+            write('\x08')
             break
 
 
