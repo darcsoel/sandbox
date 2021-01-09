@@ -19,3 +19,5 @@ sktime==0.4.1
 tensorflow==2.2.0
 tornado==6.0.4
 yellowbrick==1.2
+beautifulsoup4==4.9.3
+aiohttp==3.7.3

@@ -3,8 +3,7 @@ import itertools
 import sys
 
 
-@asyncio.coroutine
-def spinner():
+async def spinner():
     write, flush = sys.stdout.write, sys.stdout.flush
 
     for char in itertools.cycle('|/-\\'):
@@ -13,14 +12,24 @@ def spinner():
         write('\x08')
 
         try:
-            yield from asyncio.sleep(.1)
+            await asyncio.sleep(.1)
         except asyncio.CancelledError:
             break
 
 
+async def supervisor():
+    sp = asyncio.create_task(spinner())
+    await asyncio.sleep(4)
+    sp.cancel()
+    return True
+
+
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    result = loop.run_until_complete(spinner())
 
-    loop.close()
+    try:
+        result = loop.run_until_complete(supervisor())
+    finally:
+        loop.close()
+
     sys.exit()
