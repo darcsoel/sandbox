@@ -1,15 +1,27 @@
-from sklearn.preprocessing import StandardScaler
+import sys
+
+import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
-random_numbers = np.random.rand(4, 2)
-random_numbers *= 10
+if __name__ == '__main__':
+    random_numbers = np.random.rand(10).reshape(-1, 1)
+    random_numbers *= 10
 
-scaler = StandardScaler()
-scaler.fit(random_numbers)
+    plt.plot(random_numbers)
+    plt.show()
 
-scaled = scaler.transform(random_numbers)
+    scaled = StandardScaler().fit_transform(random_numbers)
 
-print(random_numbers)
-print(scaled)
+    plt.plot(scaled)
+    plt.show()
 
-exit()
+    scaled = MinMaxScaler().fit_transform(random_numbers)
+
+    plt.plot(scaled)
+    plt.show()
+
+    print(random_numbers)
+    print(scaled)
+
+    sys.exit()

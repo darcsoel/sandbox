@@ -1,8 +1,3 @@
-"""
-Rewritten pure_python/gil_/coroutine_delegated.py
-Try realize yield from construction
-"""
-
 from sys import exit
 
 
@@ -23,9 +18,8 @@ def average():
 
 
 def grouper(records, key):
-    # while True:
-    #     records[key] = yield from average()
-    pass
+    while True:
+        records[key] = yield from average()
 
 
 def main(data: dict):
@@ -44,7 +38,8 @@ def main(data: dict):
 
 
 if __name__ == '__main__':
-    data = {'first_age_set': [1, 2, 3, 4, 5, 6, 7, 8, 9], 'second_age_set': [2, 3, 7, 4, 5, 6, 7, 8, 9],
+    data = {'first_age_set': [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            'second_age_set': [2, 3, 7, 4, 5, 6, 7, 8, 9],
             'third_age_set': [9, 8, 6, 2, 5, 6, 7, 8, 9]}
 
     main(data)

@@ -7,7 +7,7 @@ from pandas.plotting import parallel_coordinates
 if __name__ == '__main__':
     fig, ax = plt.subplots(figsize=(8, 8))
 
-    x = pd.DataFrame(pd.read_csv('../../../titanic.csv'))
+    x = pd.DataFrame(pd.read_csv('titanic.csv'))
     x.drop(columns=['Name', 'Ticket', 'Cabin', 'Embarked', 'PassengerId'],
            inplace=True)
     x['Sex'].replace({'male': 1, 'female': 0}, inplace=True)

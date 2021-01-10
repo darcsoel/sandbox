@@ -35,7 +35,7 @@ def find_first_name(name):
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('../../../titanic.csv')
+    data = pd.read_csv('titanic.csv')
 
     corr_matrix = data.corr()
     sn.heatmap(corr_matrix, annot=True)
@@ -71,8 +71,18 @@ if __name__ == '__main__':
     print(f'Pearsonn correlation = {pearsonn_corr}')
 
     data['first_name'] = data['Name'].apply(find_first_name)
-    most_pop_women_name = data[data['Sex'] == 'female']['first_name'] \
-        .value_counts().idxmax()
+
+    mask = data['Sex'] == 'female'
+    most_pop_women_name = data[mask]['first_name'].value_counts().idxmax()
+
     print(f'Most popular women name = {most_pop_women_name}')
+
+    data.plot(kind='scatter', x='Pclass', y='Survived', c='red')
+    plt.show()
+
+    sn.pairplot(data[['Pclass', 'PassengerId', 'Survived', 'Age']])
+    plt.show()
+
+    print(data.describe())
 
     sys.exit()
