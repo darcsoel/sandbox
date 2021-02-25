@@ -52,10 +52,7 @@ class DataParser:
             return 0
 
         timestamps = timestamps.reset_index().sort_values('timestamp')
-        timestamps['shift'] = timestamps['timestamp'].shift()
-        timestamps['shift'][0] = timestamps['timestamp'].iloc[-1]
-        timestamps['diff'] = (timestamps['timestamp'] - timestamps['shift']) \
-            .abs()
+        timestamps['diff'] = timestamps['timestamp'].diff()
         return timestamps['diff'].sum().days / timestamps['diff'].size
 
     @staticmethod
