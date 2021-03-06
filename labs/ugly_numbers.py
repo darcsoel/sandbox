@@ -1,7 +1,14 @@
+"""
+Write a program to find the n-th ugly number.
+"""
 import sys
 
 
 def find_ugly_number_by_position_index(index):
+    """
+    Ugly numbers are positive numbers whose prime factors only include 2, 3, 5.
+    """
+
     result = 0
     searched_index = 1
 
