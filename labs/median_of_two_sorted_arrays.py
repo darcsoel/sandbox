@@ -11,8 +11,8 @@ def median(first: list, second: list):
     summary_length = len(result)
 
     if summary_length % 2 == 0:
-        first_elem = int(summary_length / 2)
-        second_elem = round(summary_length / 2)
+        first_elem = result[int(summary_length / 2)-1]
+        second_elem = result[round(summary_length / 2)]
         return (first_elem + second_elem) / 2
     else:
         return result[int(summary_length / 2)]

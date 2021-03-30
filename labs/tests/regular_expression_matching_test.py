@@ -1,40 +1,62 @@
 import unittest
-from labs.regular_expression_matching import RegEx
+
+from labs.regular_expression_matching import Solution
 
 
 class CorrectRegExSearchTestCase(unittest.TestCase):
     def test_single_character(self):
-        self.assertEqual(True, RegEx('test', 't.').match())
+        self.assertTrue(Solution().isMatch('t', '.'))
 
     def test_zero_or_more_character(self):
-        self.assertEqual(True, RegEx('test', 't*').match())
+        self.assertTrue(Solution().isMatch('tt', 't*'))
+
+    def test_zero_or_more_character2(self):
+        self.assertTrue(Solution().isMatch('aaa', 'a*a'))
 
     def test_mixed_pattern_case(self):
-        self.assertEqual(True, RegEx('test', 't*.').match())
+        self.assertTrue(Solution().isMatch('ab', '.*'))
+
+    def test_mixed_pattern_case2(self):
+        self.assertTrue(Solution().isMatch('aaa', 'a.a'))
+
+    def test_zero_or_more_complex_pattern_case(self):
+        self.assertTrue(Solution().isMatch('aab', 'c*a*b'))
+
+    def test_zero_or_more_complex_pattern_case2(self):
+        self.assertTrue(Solution().isMatch('mississippi', 'mis*is*ip*.'))
+
+    def test_zero_or_more_complex_pattern_case3(self):
+        self.assertTrue(Solution().isMatch('bbbba', '.*a*a'))
+
+    def test_zero_or_more_complex_pattern_case4(self):
+        self.assertTrue(Solution().isMatch("aaa", "ab*ac*a"))
+
+    def test_zero_or_more_complex_pattern_case5(self):
+        self.assertTrue(Solution().isMatch("aaa", "ab*a*c*a"))
+
+    def test_zero_or_more_complex_pattern_case6(self):
+        self.assertTrue(Solution().isMatch("aasdfasdfasdfasdfas",
+                                           "aasdf.*asdf.*asdf.*asdf.*s"))
 
     def test_non_pattern_string(self):
-        self.assertEqual(True, RegEx('test', 'test').match())
+        self.assertTrue(Solution().isMatch('test', 'test'))
 
 
 class IncorrectRegExSearchTestCase(unittest.TestCase):
     def test_non_pattern_string(self):
-        self.assertEqual(False, RegEx('test', 't').match())
+        self.assertFalse(Solution().isMatch('mississippi', 'mis*is*p*.'))
 
-    def test_search_str_with_num(self):
-        with self.assertRaises(ValueError):
-            RegEx("sdfdsfs3", 'fsdf*')
+    def test_single_character_without_mask(self):
+        self.assertFalse(Solution().isMatch('aa', 'a'))
 
-    def test_search_str_with_uppercase(self):
-        with self.assertRaises(ValueError):
-            RegEx("sdfdsSDFSW", 'fsdf*')
+    def test_single_character_without_mask2(self):
+        self.assertFalse(Solution().isMatch('aaa', 'aaaa'))
 
-    def test_target_str_with_num(self):
-        with self.assertRaises(ValueError):
-            RegEx("sdfds", 'fsdf123')
+    def test_mixed_pattern_case2(self):
+        self.assertFalse(Solution().isMatch('ab', '.*c'))
 
-    def test_target_str_with_wrong_pattern(self):
-        with self.assertRaises(ValueError):
-            RegEx("sdfds", 'fsdf*$%')
+    def test_zero_or_more_complex_pattern(self):
+        self.assertFalse(Solution().isMatch("aaa", "ab*a"))
 
 
 if __name__ == '__main__':

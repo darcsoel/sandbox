@@ -24,7 +24,7 @@ def find_longest_substr(string):
     for r in results:
         stringify.append(''.join(r))
 
-    return max(stringify, key=len)
+    return len(max(stringify, key=len))
 
 
 if __name__ == '__main__':

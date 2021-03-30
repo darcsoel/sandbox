@@ -3,22 +3,20 @@ import sys
 
 def add_two(int_list, target):
     """Brute force all elements to find solution"""
-
-    if len(int_list) != len(set(int_list)):
-        raise ValueError("List contain duplicates")
-
-    for i_i, i in enumerate(int_list):
-        for i_j, j in enumerate(int_list):
-            if i_i == i_j:
-                continue
-
-            if i + j == target:
-                return [i_i, i_j]
+    for index, value in enumerate(int_list):
+        check = target - value
+        try:
+            second = int_list.index(check, index + 1)
+        except IndexError:
+            continue
+        except ValueError:
+            continue
+        return [index, second]
 
 
 if __name__ == '__main__':
-    some_integers = [1, 4, 6, 3, 9]
-    result = 7
+    some_integers = [3, 2, 4]
+    result = 6
 
     print(add_two(some_integers, result))
 
