@@ -1,48 +1,36 @@
-create table if not exists animals
-(
-    id
-    serial
-    primary
-    key,
-    name
-    varchar
-(
-    50
-) unique not null,
-    species varchar
-(
-    50
-),
-    breed varchar
-(
-    50
-),
-    color varchar
-(
-    50
-)
-    );
+-- https://github.com/ami-levin/LinkedIn/tree/master/Query%20Processing/Demo%20Database
 
-create table staff
-(
-    id   serial primary key,
-    name varchar(50) not null,
-    role varchar(50) not null
-);
+select *
+from animals as a
+         left outer join (
+    vaccinations v
+        inner join staff s on s.email = v.email
+    ) on a.name = v.name
 
-create table if not exists animal_vaccinations
-(
-    id
-    serial
-    primary
-    key,
-    name
-    varchar
-(
-    50
-) not null,
-    type varchar
-(
-    40
-) not null
-    );
+
+select a.name, a.species, v.vaccine, count(v.vaccine)
+from animals as a
+         left outer join vaccinations v on a.name = v.name
+where v.vaccine is distinct from 'Rabies'
+  and a.species <> 'Rabbit'
+group by a.species, a.name, v.vaccine
+having max(v.vaccination_time) < '20191001' or max(v.vaccination_time) is null
+order by a.name
+
+-- all breeds without adoptions
+select animals.species, animals.breed
+from animals
+where (animals.species, animals.breed) not in (
+    select a.species, a.breed from animals a
+    join adoptions on adoptions.name = a.name and adoptions.species = a.species
+    where a.breed is not null
+    )
+group by animals.species, animals.breed
+
+select animals.species, animals.breed
+from animals
+except
+select a.species, a.breed
+from animals a
+join adoptions on adoptions.name = a.name and adoptions.species = a.species
+where a.breed is not null
