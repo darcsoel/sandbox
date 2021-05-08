@@ -1,9 +1,14 @@
 import logging
+from functools import partial
 
 
-def log(func):
+def log(func=None, prefix=''):
+    if not func:
+        return partial(log, prefix=prefix)
+
     def wrap_log(*args, **kwargs):
-        name = func.__name__
+        name = f'{prefix} {func.__name__}'
+        print(name)
         logger = logging.getLogger(name)
         logger.setLevel(logging.INFO)
 
@@ -29,7 +34,8 @@ def extended_log(time):
             logger.setLevel(logging.INFO)
 
             fh = logging.FileHandler("%s.log" % name)
-            fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s - {0}'.format(time)
+            fmt = '%(asctime)s - %(name)s - %(levelname)s - ' \
+                  '%(message)s - {0}'.format(time)
             formatter = logging.Formatter(fmt)
             fh.setFormatter(formatter)
             logger.addHandler(fh)
@@ -48,6 +54,11 @@ def double_function(a):
     return a * 2
 
 
+@log(prefix='**********')
+def double_function_extended(a):
+    return a * 2
+
+
 @extended_log(23)
 def tripple_function(a):
     return a * 3
@@ -55,4 +66,5 @@ def tripple_function(a):
 
 if __name__ == "__main__":
     value = double_function(2)
+    value1 = double_function_extended(2)
     value2 = tripple_function(2)
