@@ -3,7 +3,7 @@ class A:
         self.message = 'first'
 
     def check(self):
-        print(self.message)
+        return self.message
 
 
 class B:
@@ -11,21 +11,43 @@ class B:
         self.message = 'second'
 
     def check(self):
-        print(self.message)
+        return self.message
 
 
-class C(A):
+class C(A, B):
     def __init__(self):
         super().__init__()
-        self.message = 'third'
 
+
+class Parent:
     def check(self):
-        super().check() + print(self.message)
+        return 'hello'
 
 
-class Main(C, B):
-    def run(self):
-        self.check()
+class Child(Parent):
+    def check(self):
+        return super().check()
 
 
-Main().run()
+class Mock(Parent):
+    def check(self):
+        return 'mocked'
+
+
+class Mock2:
+    def check(self):
+        return 'mocked2'
+
+
+class CheckMro(Child, Mock):
+    pass
+
+
+class CheckMro2(Child, Mock2):
+    pass
+
+
+if __name__ == '__main__':
+    print(C().check())
+    print(CheckMro().check())
+    print(CheckMro2().check())
