@@ -17,4 +17,4 @@ def calculate_pi(points_count=1000):
 
 
 if __name__ == '__main__':
-    print(calculate_pi())
+    print(calculate_pi(3_000_000))
