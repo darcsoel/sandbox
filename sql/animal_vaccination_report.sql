@@ -34,3 +34,15 @@ select a.species, a.breed
 from animals a
 join adoptions on adoptions.name = a.name and adoptions.species = a.species
 where a.breed is not null
+
+-- statictics by year, stuff, year and stuff, species
+select coalesce(cast(extract(year from v.vaccination_time) as varchar(10)), 'all years') as year,
+       coalesce(v.species, 'all species') as species,
+       coalesce(v.email, 'all emails') as email,
+       case when grouping(v.email) = 0 then max(p.first_name) else '' end as first_name,
+       case when grouping(v.email) = 0 then max(p.last_name) else '' end as last_name,
+       count(*) as number_of_vaccinations,
+       max(extract(year from v.vaccination_time)) as last_year
+from vaccinations v
+inner join persons p on v.email = p.email
+group by grouping sets ((), v.vaccination_time, v.species, (v.vaccination_time, v.species), v.email, (v.email, v.species))
