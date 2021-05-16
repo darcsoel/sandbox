@@ -8,7 +8,7 @@ def add(a: int, b: int):
 
 @add.register(str)
 def _(a: str, b: str):
-    return f'{a} {b}'
+    return f'{a} --- {b}'
 
 
 first_number = 1
