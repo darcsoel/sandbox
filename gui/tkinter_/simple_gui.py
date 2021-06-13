@@ -1,6 +1,6 @@
 """Simple example of tkinter gui"""
 
-from tkinter import Tk, Label, Button
+from tkinter import Button, Label, Tk
 
 
 class MainWindow:
@@ -32,7 +32,8 @@ class MainWindow:
         return self
 
     def _add_button(self):
-        self._button = Button(self._root, text=self._button_text, command=self.first_button)
+        self._button = Button(self._root, text=self._button_text,
+                              command=self.first_button)
         self._button.grid(column=1, row=0)
         return self
 

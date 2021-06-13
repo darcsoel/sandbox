@@ -22,7 +22,7 @@ class DoubleLinkedItem:
 
     @previous.setter
     def previous(self, link):
-        self._previous= link
+        self._previous = link
 
     def __str__(self):
         return self.value
@@ -31,4 +31,3 @@ class DoubleLinkedItem:
 class DoubleLinkedList:
     def __init__(self):
         self._root = None
-

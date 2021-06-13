@@ -7,21 +7,17 @@ def merge_sort(array):
     second = merge_sort(array[midpoint:])
     result = []
 
-    while len(first) > 0 and len(second) > 0:
+    while first and second:
         if first[0] > second[0]:
-            result.append(second[0])
-            del second[0]
+            result.append(second.pop(0))
         else:
-            result.append(first[0])
-            del first[0]
+            result.append(first.pop(0))
 
-    while len(first) > 0:
-        result.append(first[0])
-        del first[0]
+    while first:
+        result.append(first.pop(0))
 
-    while len(second) > 0:
-        result.append(second[0])
-        del second[0]
+    while second:
+        result.append(second.pop(0))
 
     return result
 

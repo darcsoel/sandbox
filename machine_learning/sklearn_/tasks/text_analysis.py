@@ -12,7 +12,8 @@ sns.set()
 
 model = make_pipeline(TfidfVectorizer(), MultinomialNB())
 
-categories = ['alt.atheism', 'talk.religion.misc', 'soc.religion.christian', 'comp.graphics', 'sci.med', 'sci.space']
+categories = ['alt.atheism', 'talk.religion.misc', 'soc.religion.christian',
+              'comp.graphics', 'sci.med', 'sci.space']
 
 train = fetch_20newsgroups(categories=categories)
 test = fetch_20newsgroups(categories=categories, subset='test')
@@ -21,12 +22,13 @@ model.fit(train.data, train.target)
 labels = model.predict(test.data)
 
 matrix = confusion_matrix(test.target, labels)
-sns.heatmap(matrix.T, square=True, annot=True, xticklabels=train.target_names, yticklabels=train.target_names)
+sns.heatmap(matrix.T, square=True, annot=True, xticklabels=train.target_names,
+            yticklabels=train.target_names)
 
 plt.xlabel('true')
 plt.ylabel('predicted')
 
-# plt.show()
+plt.show()
 
 
 def predict_text_category(text):
@@ -36,7 +38,8 @@ def predict_text_category(text):
     return train.target_names[label[0]]
 
 
-text_to_predict = ['some space ship', 'some religion stuff', 'big red church', 'new colors']
+text_to_predict = ['some space ship', 'some religion stuff',
+                   'big red church', 'new colors']
 
 for phrase in text_to_predict:
     print(predict_text_category(phrase))

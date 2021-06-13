@@ -33,7 +33,16 @@ if __name__ == '__main__':
     worker = coroutine_modern()
     next(worker)
     x1 = worker.send(['test new', 'test new 2'])
-    print(f'[Coroutine modern] outer value = {x1}')
+
+    while True:
+        try:
+            if not x1:
+                break
+            print(f'[Coroutine modern] outer value = {x1}')
+            x1 = next(worker)
+        except StopIteration:
+            break
+
     worker.close()
 
     exit()

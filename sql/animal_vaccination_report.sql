@@ -54,6 +54,10 @@ inner join persons p on v.email = p.email
 group by grouping sets ((), v.vaccination_time, v.species, (v.vaccination_time, v.species),
 v.email, (v.email, v.species))
 
+
+select name, cast(count(vaccine) over (order by extract(year from vaccination_time) asc range between 2 preceding and 1 preceding) as decimal(10, 2)) as vac_count from vaccinations group by name, vaccine, vaccination_time
+
+
 with annual_vaccinations as (
     select cast(extract(year from v.vaccination_time) as int) as year,
            count(*) as vaccinations_count
@@ -68,6 +72,8 @@ select *,
        cast((100 * vaccinations_count / prev_2_years_average) as decimal(5, 2)) as prev_2_years_vaccination_percentage
 from annual_vaccinations_for_2_prev_years
 order by year
+
+
 
 
 with checkups_with_temo_diff as (

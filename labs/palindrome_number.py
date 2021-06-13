@@ -16,10 +16,7 @@ def check_if_palindrome(number: int):
         rev = rev * 10 + dig
         number //= 10
 
-    if temp == rev:
-        return True
-    else:
-        return False
+    return temp == rev
 
 
 if __name__ == '__main__':

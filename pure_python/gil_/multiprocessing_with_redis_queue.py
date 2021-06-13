@@ -1,6 +1,7 @@
 import multiprocessing
 import random
 from sys import exit
+
 import redis
 
 
@@ -51,8 +52,10 @@ def main():
     random_list_len = len(random_list)
     print(f'Numbers list length = {random_list_len}')
 
-    creator_process = multiprocessing.Process(target=CreatorProcess(random_list, redis_queue))
-    consumer_process = multiprocessing.Process(target=ConsumerProcess(random_list, redis_queue))
+    creator_process = multiprocessing.Process(
+        target=CreatorProcess(random_list, redis_queue))
+    consumer_process = multiprocessing.Process(
+        target=ConsumerProcess(random_list, redis_queue))
 
     print('Start processes')
     creator_process.start()

@@ -1,21 +1,32 @@
-from functools import reduce
-from operator import mul
-from typing import List
-
-
 class Solution:
     def __init__(self):
-        self.result = []
+        self._generated = []
+        self._result = []
 
-    @classmethod
-    def factorial(cls, n):
-        return reduce(mul, range(1, n + 1))
+    def generate(self, n):
+        if len(self._generated) == 2 * n:
+            if self.valid():
+                self._result.append("".join(self._generated))
+        else:
+            self._generated.append('(')
+            self.generate(n)
+            self._generated.pop()
+            self._generated.append(')')
+            self.generate(n)
+            self._generated.pop()
 
-    @classmethod
-    def calculate_max_combinations(cls, n):
-        return cls.factorial(2) / (cls.factorial(n - 2) * cls.factorial(2))
+    def valid(self):
+        bal = 0
+        for c in self._generated:
+            if c == '(':
+                bal += 1
+            else:
+                bal -= 1
+            if bal < 0:
+                return False
 
-    def generateParenthesis(self, n: int) -> List[str]:
-        # max_combination = self.calculate_max_combinations(n)
+        return not bal
 
-        return []
+    def generateParenthesis(self, n):
+        self.generate(n)
+        return self._result

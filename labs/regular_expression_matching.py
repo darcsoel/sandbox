@@ -12,7 +12,10 @@ The matching should cover the entire input string (not partial).
 
 
 class ComplexSolution:
-    """Main parser class"""
+    """
+    Main parser class
+    Still not stable, need fix
+    """
 
     def __init__(self):
         self._pattern = self._matches_found = None
@@ -102,6 +105,7 @@ class ComplexSolution:
         return any(result)
 
 
+# perfect solution from leet code
 class Solution:
     def isMatch(self, text, pattern):
         if not pattern:
