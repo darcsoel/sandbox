@@ -16,7 +16,7 @@ from 'Rabies'
     and a.species <> 'Rabbit'
 group by a.species, a.name, v.vaccine
 having max (v.vaccination_time) < '20191001' or max (v.vaccination_time) is null
-order by a.name
+order by a.name;
 
 -- all breeds without adoptions
 select animals.species, animals.breed
@@ -27,7 +27,7 @@ where (animals.species, animals.breed) not in (
              join adoptions on adoptions.name = a.name and adoptions.species = a.species
     where a.breed is not null
 )
-group by animals.species, animals.breed
+group by animals.species, animals.breed;
 
 select animals.species, animals.breed
 from animals
@@ -35,7 +35,7 @@ from animals
 select a.species, a.breed
 from animals a
          join adoptions on adoptions.name = a.name and adoptions.species = a.species
-where a.breed is not null
+where a.breed is not null;
 
 -- statictics by year, stuff, year and stuff, species
 select coalesce(cast(extract(year from v.vaccination_time) as varchar(10)), 'all years') as year,
@@ -52,10 +52,10 @@ as last_name,
 from vaccinations v
 inner join persons p on v.email = p.email
 group by grouping sets ((), v.vaccination_time, v.species, (v.vaccination_time, v.species),
-v.email, (v.email, v.species))
+v.email, (v.email, v.species));
 
 
-select name, cast(count(vaccine) over (order by extract(year from vaccination_time) asc range between 2 preceding and 1 preceding) as decimal(10, 2)) as vac_count from vaccinations group by name, vaccine, vaccination_time
+select name, cast(count(vaccine) over (order by extract(year from vaccination_time) asc range between 2 preceding and 1 preceding) as decimal(10, 2)) as vac_count from vaccinations group by name, vaccine, vaccination_time;
 
 
 with annual_vaccinations as (
@@ -71,9 +71,17 @@ with annual_vaccinations as (
 select *,
        cast((100 * vaccinations_count / prev_2_years_average) as decimal(5, 2)) as prev_2_years_vaccination_percentage
 from annual_vaccinations_for_2_prev_years
-order by year
+order by year;
 
 
+with vacc_counter as (
+    select name, count('vaccine') vc, dense_rank() over (order by count('vaccine') desc) drank
+    from vaccinations
+    group by name
+)
+select name, vc, drank
+from vacc_counter
+where drank = 1;
 
 
 with checkups_with_temo_diff as (
