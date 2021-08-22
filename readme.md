@@ -1,5 +1,8 @@
 This repository was created for learning purpose
 
+Sync dependencies with `pip-compile --output-file requirements.txt requirements.in`
+
+
 You need Python 3.7 to run async code
 
 Folder `pure_python` contains legacy code, it need refactoring

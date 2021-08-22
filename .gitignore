@@ -5,7 +5,6 @@
 /*.pyc
 *.log
 pure_python/*.log
-*.txt
 pure_python/*.txt
 data_*.json
 
